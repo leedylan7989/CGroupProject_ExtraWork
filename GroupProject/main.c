@@ -41,11 +41,19 @@ void initializeTable(Node**);
 //Basic functions
 void add(Node**, Manga);
 bool edit(int, Node*);
-void delete();
+void delete(Node**, int);
 char* getString();
+void addManga(Node**);
+bool deleteManga(Node**);
+void printAll(Node**);
+void printNode(Node*);
+
+//Screens
+int mainScreen();
 
 //Search
-void search();
+Node* searchByID(Node**, int);
+Node* searchByTitle(Node**, char*);
 
 //Additional functionality
 void filterByGenre();
@@ -56,29 +64,6 @@ void freeTable(Node***);
 void freeList(Node**);
 void freeNode(Node**);
 
-void test(Node** table){
-    Manga manga;
-    manga.id = 1;
-    manga.author = NULL;
-    manga.genre = NULL;
-    manga.publisher = NULL;
-    manga.price = 0.0;
-    manga.title = NULL;
-    manga.used = false;
-    manga.count = 1;
-    add(table, manga);
-    
-    Manga manga2;
-    manga2.id = 81;
-    manga2.author = NULL;
-    manga2.genre = NULL;
-    manga2.publisher = NULL;
-    manga2.price = 0.0;
-    manga2.title = NULL;
-    manga2.used = false;
-    manga2.count = 1;
-    add(table, manga2);
-}
 int main() {
     //Store node pointers instead of storing the whole nodes
     Node** table = (Node**)malloc(SIZE*sizeof(Node*));
@@ -92,16 +77,248 @@ int main() {
     
     //readFile(table);
     
-    //Test code
-    test(table);
+    int choice;
+    while((choice = mainScreen())){
+        if(choice == 1){
+            //Add
+            addManga(table);
+        } else if(choice == 2){
+            
+        } else if(choice == 3){
+            //Delete
+            if(deleteManga(table)){
+                printf("\nDelete successful.\n");
+            }else{
+                printf("\nDelete failed.\n");
+            }
+        } else if(choice == 4) {
+            //Search
+            printf("\n1 - Search by ID\n2 - Search by Title\n");
+            int choice;
+            scanf("%d", &choice);
+            while (choice != 1 && choice != 2) {
+                printf("Please select the valid options.\n");
+                scanf("%d", choice);
+            }
+            
+            FLUSH;
+            
+            if(choice == 1){
+                printf("Type the ID you want to search.\n");
+                int id;
+                scanf("%d", &id);
+                while (id < 0) {
+                    printf("Please select a valid id.\n");
+                    scanf("%d", &id);
+                }
+                Node* node = searchByID(table, id);
+                if (node != NULL) {
+                    printNode(node);
+                } else {
+                    printf("\nSEARCH FAILED. ID NOT FOUND.\n");
+                }
+            } else if(choice == 2){
+                printf("Type the title you want to search.\n");
+                char* title = getString();
+
+                Node* node = searchByTitle(table, title);
+                if (node != NULL) {
+                    printNode(node);
+                } else {
+                    printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
+                }
+            }
+        } else if(choice == 5){
+            printf("\n==========================================\n");
+            printAll(table);
+            printf("==========================================\n\n");
+        }
+    }
     
-    printf("%d", table[1]->manga.id);
     
+    //writeFile(table);
+    
+    
+    printf("Thanks for using our shop!\n");
     freeTable(&table);
     
     
     
     return 0;
+}
+
+void printAll(Node** table){
+    Node* current;
+    for(int i = 0; i < SIZE; i++){
+        current = table[i];
+        while(current != NULL){
+            printNode(current);
+            current = current->next;
+        printf("-------------------------------------------\n");
+        }
+    }
+}
+
+
+void printNode(Node* node){
+    printf("\nID: %d\nTitle: %s\nAuthor: %s\nGenre: %s\nPublisher: %s\n"
+            "Price: %lf\nCount: %d\n", node->manga.id, node->manga.title,
+            node->manga.author,node->manga.genre, node->manga.publisher,
+            node->manga.price, node->manga.count);
+    if(node->manga.used){
+        printf("Used\n");
+    }else{
+        printf("New\n");
+    }
+}
+bool deleteManga(Node** table){
+    printf("Which Manga do you want to delete?\n"
+            "1 - Search by ID\n2 - Search by Title\n");
+    int choice;
+    scanf("%d", &choice);
+    while(choice != 1 && choice != 2){
+        printf("Please select the valid options.\n");
+        scanf("%d", choice);
+    }
+    
+    if(choice == 1) {
+        printf("Type the ID you want to delete.\n");
+        int id;
+        scanf("%d", &id);
+        while (id < 0) {
+            printf("Please select a valid id.\n");
+            scanf("%d", &id);
+        }
+
+        if (searchByID(table, id) != NULL) {
+            delete(table, id);
+            return true;
+        } else {
+            return false;
+        }
+    } else if(choice == 2){
+        printf("Type the title you want to delete.\n");
+        char* deleteTitle = getString();
+        
+        Node* node = searchByTitle(table, deleteTitle);
+        if(node != NULL){
+            delete(table, node->manga.id);
+            return true;
+        }else {
+            return false;
+        }
+    }
+    return false;
+}
+
+Node* searchByTitle(Node** table, char* title){
+    Node* current = NULL;
+    for(int i = 0; i < SIZE; i++){
+        current = table[i];
+        while(current != NULL){
+            if(strcmp(current->manga.title, title) == 0){
+                return current;
+            }else{
+                current = current->next;
+            }
+        }
+    }
+    return current;
+}
+Node* searchByID(Node** table, int id){
+    int key = divisionHash(id);
+    Node* current = table[key];
+    while(current != NULL){
+        if(current->manga.id = id){
+            return current;
+        } else {
+            current = current->next;
+        }
+    }
+    return current;
+}
+void addManga(Node** table){
+    Manga new;
+    int id;
+    printf("\nType an ID (integer) for new Manga\n");
+    scanf("%d", &id);
+    while(searchByID(table, id) != NULL){
+        printf("ID exists. Please type a new ID.\n");
+        scanf("%d", &id);
+    }
+    new.id = id;
+    FLUSH;
+    printf("Type the title of new Manga\n");
+    char* newTitle = getString();
+    if(newTitle != NULL){
+        new.title = newTitle;
+    }
+    printf("Type the author of new Manga\n");
+    char* newAuthor = getString();
+    if(newAuthor != NULL){
+        new.author = newAuthor;
+    }
+    printf("Type the genre of new Manga\n");
+    char* newGenre = getString();
+    if(newAuthor != NULL){
+        new.genre = newGenre;
+    }
+    printf("Type the publisher of new Manga\n");
+    char* newPublisher = getString();
+    if(newAuthor != NULL){
+        new.publisher = newPublisher;
+    }
+    printf("Used? [y/n]\n");
+    char yesorno;
+    while((yesorno = getchar()) != 'y' && yesorno != 'n'){
+        printf("Please enter either 'y' or 'n'.\n");
+        yesorno = getchar();
+    }
+    if(yesorno == 'y'){
+       new.used = true; 
+    }else{
+        new.used = false;
+    }
+    printf("Type the price.\n");
+    double newPrice;
+    scanf("%lf", &newPrice);
+    while(newPrice < 0.0){
+        printf("Please type a valid price value.\n");
+        scanf("%lf", &newPrice);
+    }
+    new.price = newPrice;
+    
+    printf("Type the number of the book.\n");
+    int newCount;
+    scanf("%d", &newCount);
+    while(newCount < 0 ){
+        printf("Negative value is invalid. Please type a positive value.\n");
+        scanf("%d", &newCount);
+    }
+    new.count = newCount;
+    
+    add(table, new);
+    
+    printf("\nNew book added!\n");
+}
+
+int mainScreen(){
+    int a;
+    printf("=============================================================\n");
+    printf("Welcome to Manga Shop!\n");
+    printf("=============================================================\n");
+    printf("===== 0 - Exit === 1 - Add === 2 - Edit === 3 - Delete ====\n");
+    printf("===== 4 - Search ==== 5 - Show All ==========================\n");
+    printf("=============================================================\n");
+    printf("Type an option: ");
+    scanf("%d", &a);
+    while (a != 1 && a != 2 && a != 3 && a != 4 && a != 0 && a != 5) {
+        printf("Invalid Options. Please select a correct option.\n"
+                "Type an option: ");
+        scanf("%d", &a);
+    }
+    
+    return a;
 }
 
 //Heon Lee
@@ -274,7 +491,7 @@ void freeNode(Node** node){
     }
     
     if((*node)->manga.title != NULL){
-        free((*node)->manga.genre);
+        free((*node)->manga.title);
     }
     
     if((*node)->manga.publisher != NULL){
