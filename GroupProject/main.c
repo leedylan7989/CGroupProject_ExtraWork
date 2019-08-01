@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
+#define FLUSH stdin=freopen(NULL,"r",stdin)
 #define SIZE 80
 
 typedef struct{
@@ -40,6 +42,7 @@ void initializeTable(Node**);
 void add(Node**, Manga);
 void edit();
 void delete();
+char* getString();
 
 //Search
 void search();
@@ -48,17 +51,32 @@ void search();
 void filterByGenre();
 void sort();
 
+//Free table
+void freeTable(Node**);
+
 int main() {
     //Store node pointers instead of storing the whole nodes
     Node** table = (Node**)malloc(SIZE*sizeof(Node*));
+    
+    //If table is NULL
+    if(table == NULL){
+        exit(1);
+    }
     
     initializeTable(table);
     
     //readFile(table);
     
+    /*  Test code
+    printf("Author for manga 1\n");
+    char* author1 = getString();
+    
+    printf("Author for manga 2\n");
+    char* author2 = getString();
+    
     Manga manga;
     manga.id = 1;
-    manga.author = NULL;
+    manga.author = author1;
     manga.genre = NULL;
     manga.publisher = NULL;
     manga.price = 0.0;
@@ -69,7 +87,7 @@ int main() {
     
     Manga manga2;
     manga2.id = 81;
-    manga2.author = NULL;
+    manga2.author = author2;
     manga2.genre = NULL;
     manga2.publisher = NULL;
     manga2.price = 0.0;
@@ -78,12 +96,39 @@ int main() {
     manga2.count = 1;
     add(table, manga2);
     
+    printf("%s\n", table[1]->manga.author);
+    printf("%s\n", table[1]->next->manga.author);
+    
     delete(table, 1);
     delete(table, 81);
+     * 
+     * 
+    */
+    free(table);
     
     
     
     return 0;
+}
+
+//Heon Lee
+//This function waits for user input
+//and allocates the input to Heap
+//Returns the memory address of the input
+//to the caller
+char* getString(){
+    char tmp[100] = {0};
+    
+    fgets(tmp, sizeof(tmp), stdin);
+    tmp[strcspn(tmp, "\n")] = 0;
+    
+    char* str = NULL;
+    if(strlen(tmp) > 0){
+        str = (char*)malloc((strlen(tmp)+1)*sizeof(char));
+        strcpy(str, tmp);
+    }
+    FLUSH;
+    return str;
 }
 
 //Heon Lee
@@ -122,6 +167,10 @@ void delete(Node** table, int id){
 void add(Node** table, Manga manga){
     int key = divisionHash(manga.id);
     Node* temp = (Node*)malloc(sizeof(Node));
+    //If temp is NULL
+    if(temp == NULL){
+        exit(1);
+    }
     temp->manga = manga;
     temp->next = NULL;
     if(table[key] == NULL){
