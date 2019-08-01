@@ -52,6 +52,7 @@ void printNode(Node*);
 int mainScreen();
 
 //Search
+Node* searchManga(Node**, int);
 Node* searchByID(Node**, int);
 Node* searchByTitle(Node**, char*);
 
@@ -83,6 +84,7 @@ int main() {
             //Add
             addManga(table);
         } else if(choice == 2){
+            //Edit
             
         } else if(choice == 3){
             //Delete
@@ -93,41 +95,7 @@ int main() {
             }
         } else if(choice == 4) {
             //Search
-            printf("\n1 - Search by ID\n2 - Search by Title\n");
-            int choice;
-            scanf("%d", &choice);
-            while (choice != 1 && choice != 2) {
-                printf("Please select the valid options.\n");
-                scanf("%d", choice);
-            }
-            
-            FLUSH;
-            
-            if(choice == 1){
-                printf("Type the ID you want to search.\n");
-                int id;
-                scanf("%d", &id);
-                while (id < 0) {
-                    printf("Please select a valid id.\n");
-                    scanf("%d", &id);
-                }
-                Node* node = searchByID(table, id);
-                if (node != NULL) {
-                    printNode(node);
-                } else {
-                    printf("\nSEARCH FAILED. ID NOT FOUND.\n");
-                }
-            } else if(choice == 2){
-                printf("Type the title you want to search.\n");
-                char* title = getString();
-
-                Node* node = searchByTitle(table, title);
-                if (node != NULL) {
-                    printNode(node);
-                } else {
-                    printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
-                }
-            }
+            searchManga(table);
         } else if(choice == 5){
             printf("\n==========================================\n");
             printAll(table);
@@ -145,6 +113,65 @@ int main() {
     
     
     return 0;
+
+}
+
+void editManga(Node** table){
+    //First, search a Manga to edit.
+    printf("Search a Manga to edit");
+    Node* node = searchManga(table,1);
+}
+
+//Searching Manga from the hash table
+//If select == 0, then return null.
+//If select == 1, return a selected Manga.
+//A caller will only set select to 1
+//when a caller needs to retreive
+//a selected record.
+Node* searchManga(Node** table, int select) {
+    //Search
+    printf("\n1 - Search by ID\n2 - Search by Title\n");
+    int choice;
+    scanf("%d", &choice);
+    while (choice != 1 && choice != 2) {
+        printf("Please select the valid options.\n");
+        scanf("%d", choice);
+    }
+
+    FLUSH;
+
+    if (choice == 1) {
+        printf("Type the ID you want to search.\n");
+        int id;
+        scanf("%d", &id);
+        while (id < 0) {
+            printf("Please select a valid id.\n");
+            scanf("%d", &id);
+        }
+        Node* node = searchByID(table, id);
+        if (node != NULL) {
+            printNode(node);
+        } else {
+            printf("\nSEARCH FAILED. ID NOT FOUND.\n");
+        }
+        
+        if(select)
+            return node;
+    } else if (choice == 2) {
+        printf("Type the title you want to search.\n");
+        char* title = getString();
+
+        Node* node = searchByTitle(table, title);
+        if (node != NULL) {
+            printNode(node);
+        } else {
+            printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
+        }
+        if(select)
+        return node;
+    }
+    
+    return NULL;
 }
 
 void printAll(Node** table){
