@@ -78,15 +78,47 @@ int main() {
     manga2.count = 1;
     add(table, manga2);
     
+    delete(table, 1);
+    delete(table, 81);
+    
+    
     
     return 0;
 }
 
+//Heon Lee
 void delete(Node** table, int id){
+    int key = divisionHash(id);
+    bool found = false;
+    Node* current = table[key];
+    Node* prev = NULL;
+    while(!found && current != NULL){
+        if(current->manga.id == id){
+            found = true;
+        }else{
+            if(current->next != NULL){
+               prev = current; 
+            }
+            current = current->next;
+        }
+    }
     
-    
+    if(table[key]->manga.id == current->manga.id){
+        //found node is at first of the linked list
+        table[key] = current->next;
+    } else if(current->next == NULL){
+        //found node is at the end
+        prev->next = NULL;
+    } else{
+        //Mid-way
+        prev->next = current->next;
+    }
+    if(found){
+        free(current);
+    }
 }
 
+//Heon Lee
 void add(Node** table, Manga manga){
     int key = divisionHash(manga.id);
     Node* temp = (Node*)malloc(sizeof(Node));
