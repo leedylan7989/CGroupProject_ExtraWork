@@ -27,7 +27,7 @@ typedef struct node {
 //Add any necessary functions and change return type
 //If successful, return the Heap allocated array pointer to main
 //If failed, return null
-void readFile(int**);
+void readFile(Node**);
 void writeFile();
 
 //View functions
