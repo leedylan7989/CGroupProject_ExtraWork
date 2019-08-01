@@ -56,21 +56,7 @@ void freeTable(Node***);
 void freeList(Node**);
 void freeNode(Node**);
 
-int main() {
-    //Store node pointers instead of storing the whole nodes
-    Node** table = (Node**)malloc(SIZE*sizeof(Node*));
-    
-    //If table is NULL
-    if(table == NULL){
-        exit(1);
-    }
-    
-    initializeTable(table);
-    
-    //readFile(table);
-    
-    //Test code
-    
+void test(Node** table){
     Manga manga;
     manga.id = 1;
     manga.author = NULL;
@@ -92,6 +78,24 @@ int main() {
     manga2.used = false;
     manga2.count = 1;
     add(table, manga2);
+}
+int main() {
+    //Store node pointers instead of storing the whole nodes
+    Node** table = (Node**)malloc(SIZE*sizeof(Node*));
+    
+    //If table is NULL
+    if(table == NULL){
+        exit(1);
+    }
+    
+    initializeTable(table);
+    
+    //readFile(table);
+    
+    //Test code
+    test(table);
+    
+    printf("%d", table[1]->manga.id);
     
     freeTable(&table);
     
