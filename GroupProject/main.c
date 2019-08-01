@@ -40,7 +40,7 @@ void initializeTable(Node**);
 
 //Basic functions
 void add(Node**, Manga);
-void edit();
+bool edit(int, Node*);
 void delete();
 char* getString();
 
@@ -52,7 +52,9 @@ void filterByGenre();
 void sort();
 
 //Free table
-void freeTable(Node**);
+void freeTable(Node***);
+void freeList(Node**);
+void freeNode(Node**);
 
 int main() {
     //Store node pointers instead of storing the whole nodes
@@ -67,16 +69,11 @@ int main() {
     
     //readFile(table);
     
-    /*  Test code
-    printf("Author for manga 1\n");
-    char* author1 = getString();
-    
-    printf("Author for manga 2\n");
-    char* author2 = getString();
+    //Test code
     
     Manga manga;
     manga.id = 1;
-    manga.author = author1;
+    manga.author = NULL;
     manga.genre = NULL;
     manga.publisher = NULL;
     manga.price = 0.0;
@@ -87,7 +84,7 @@ int main() {
     
     Manga manga2;
     manga2.id = 81;
-    manga2.author = author2;
+    manga2.author = NULL;
     manga2.genre = NULL;
     manga2.publisher = NULL;
     manga2.price = 0.0;
@@ -96,19 +93,114 @@ int main() {
     manga2.count = 1;
     add(table, manga2);
     
-    printf("%s\n", table[1]->manga.author);
-    printf("%s\n", table[1]->next->manga.author);
-    
-    delete(table, 1);
-    delete(table, 81);
-     * 
-     * 
-    */
-    free(table);
+    freeTable(&table);
     
     
     
     return 0;
+}
+
+//Heon Lee
+//A caller records a user's choice in an int variable
+//Choice List
+/*
+ * 1 - title
+ * 2 - author
+ * 3 - genre
+ * 4 - publisher
+ * 5 - used
+ * 6 - price
+ * 7 - count
+ */
+bool edit(int choice, Node* node){
+    if(choice == 1 || choice == 2 || choice == 3 ||
+            choice == 4){
+        if (choice == 1)
+            printf("Type a new title for Manga\n");
+        else if (choice == 2)
+            printf("Type a new author for Manga\n");
+        else if (choice == 3)
+            printf("Type a new genre for Manga\n");
+        else
+            printf("Type a new publisher for Manga\n");
+        char* new = getString();
+        if(new != NULL){
+            if(choice == 1)
+                node->manga.title = new;
+            else if (choice == 2)
+                node->manga.author = new;
+            else if (choice == 3)
+                node->manga.genre = new;
+            else
+                node->manga.publisher = new;
+            return true;
+        } else {
+            return false;
+        }
+    } else if(choice == 5){
+        //Change used
+        node->manga.used = !node->manga.used;
+        printf("%s", node->manga.used ? "Changed from false to true" :
+            "Changed from true to false");
+        return true;
+    } else if(choice == 6){
+        //Price
+        double new;
+        printf("Type a new price for Manga.\n-999 - Exit\n");
+        scanf("%lf", &new);
+        if(new == -999){
+            return false;
+        }
+        while(new < 0.0){
+            printf("Negative value is not a valid price. Type again. -999 - Exit");
+            scanf("%lf", &new);
+            if(new == -999){
+                return false;
+            }
+        }
+        node->manga.price = new;
+        return true;
+    } else {
+        //Count
+        int choiceCount;
+        int amount;
+        printf("1 - Increase count\n2 - Decrease Count\n0 - Exit\n");
+        scanf("%d", choiceCount);
+        //Exit condition
+        if(choiceCount){
+            return false;
+        }
+        while(choiceCount != 1 || choiceCount != 2){
+            printf("1 or 2 are the only valid options. 0 - Exit.");
+            scanf("%d", choiceCount);
+            if(choiceCount){
+                return false;
+            }
+        }
+        printf("How many?\n0 - Exit\n");
+        scanf("%d", amount);
+        //Exit condition
+        if(amount){
+            return false;
+        }
+        //Validation
+        if(choiceCount == 2){
+            while((node->manga.count - amount) < 0){
+                printf("Invalid amount. Please type again.\n0 - Exit\n");
+                scanf("%d", amount);
+                if(amount)
+                    return false;
+            }
+        }
+        
+        if(choiceCount == 1){
+            node->manga.count = node->manga.count + amount;
+            return true;
+        } else {
+            node->manga.count = node->manga.count - amount;
+            return true;
+        }
+    }
 }
 
 //Heon Lee
@@ -125,6 +217,9 @@ char* getString(){
     char* str = NULL;
     if(strlen(tmp) > 0){
         str = (char*)malloc((strlen(tmp)+1)*sizeof(char));
+        if(str == NULL){
+            exit(1);
+        }
         strcpy(str, tmp);
     }
     FLUSH;
@@ -157,10 +252,56 @@ void delete(Node** table, int id){
     } else{
         //Mid-way
         prev->next = current->next;
+        current->next = NULL;
     }
     if(found){
-        free(current);
+        freeNode(&current);
     }
+}
+
+//Heon Lee
+void freeNode(Node** node){
+    if((*node)->manga.author != NULL){
+        free((*node)->manga.author);
+    }
+    
+    if((*node)->manga.genre != NULL){
+        free((*node)->manga.genre);
+    }
+    
+    if((*node)->manga.title != NULL){
+        free((*node)->manga.genre);
+    }
+    
+    if((*node)->manga.publisher != NULL){
+        free((*node)->manga.publisher);
+    }
+    
+    //Make sure node->next is not pointing to anything
+    if((*node)->next != NULL){
+        (*node)->next = NULL;
+    }
+    
+    free(*node);
+}
+
+
+//Heon Lee
+void freeList(Node** head){
+    //Move to the tail node of the list
+    while(*head != NULL){
+        Node* temp = *head;
+        *head = (*head)->next;
+        freeNode(&temp);
+    }
+}
+
+//Heon Lee
+void freeTable(Node*** table){
+    for(int i = 0; i < SIZE; i++){
+        freeList(&((*table)[i]));
+    }
+    free(*table);
 }
 
 //Heon Lee
