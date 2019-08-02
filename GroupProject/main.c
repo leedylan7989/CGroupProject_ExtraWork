@@ -31,10 +31,6 @@ typedef struct node {
 void readFile(Node**);
 void writeFile();
 
-//View functions
-void showAll();
-void viewDetails(int);
-
 //Hash table functions
 int divisionHash(int);
 void initializeTable(Node**);
@@ -47,6 +43,8 @@ char* getString();
 void addManga(Node**);
 bool deleteManga(Node**);
 bool editManga(Node**);
+
+//Print functions
 void printAll(Node**);
 void printNode(Node*);
 
@@ -59,8 +57,8 @@ Node* searchByID(Node**, int);
 Node* searchByTitle(Node**, char*);
 
 //Additional functionality
-void filterByGenre();
-void sort();
+void filterByGenre(Node**);
+void sort(Node**);
 
 //Free table
 void freeTable(Node***);
@@ -510,27 +508,36 @@ int mainScreen() {
 bool edit(int choice, Node* node) {
     if (choice == 1 || choice == 2 || choice == 3 ||
             choice == 4) {
-        if (choice == 1)
+        if (choice == 1){
+                printf("\nOLD VALUE: %s\n", node->manga.title);
             printf("Type a new title for Manga\n");
-        else if (choice == 2)
+        }
+        else if (choice == 2){
+                printf("\nOLD VALUE: %s\n", node->manga.author);
             printf("Type a new author for Manga\n");
-        else if (choice == 3)
+        }
+        else if (choice == 3){
+                printf("\nOLD VALUE: %s\n", node->manga.genre);
             printf("Type a new genre for Manga\n");
-        else
+        }
+        else{
+                printf("\nOLD VALUE: %s\n", node->manga.publisher);
             printf("Type a new publisher for Manga\n");
+        }
         char* new = getString();
         printf("EDIT? [y/n]");
         char c = getchar();
         checkYN(c);
         if (new != NULL && c == 'y') {
-            if (choice == 1)
+            if (choice == 1) {
                 node->manga.title = new;
-            else if (choice == 2)
+            } else if (choice == 2) {
                 node->manga.author = new;
-            else if (choice == 3)
+            } else if (choice == 3) {
                 node->manga.genre = new;
-            else
+            } else {
                 node->manga.publisher = new;
+            }
             return true;
         } else {
             return false;
