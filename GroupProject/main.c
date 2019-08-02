@@ -17,7 +17,6 @@ typedef struct {
     char* publisher;
     bool used;
     double price;
-    int count;
 } Manga;
 
 typedef struct node {
@@ -68,6 +67,8 @@ void freeTable(Node***);
 void freeList(Node**);
 void freeNode(Node**);
 
+void checkYN(char);
+
 int main() {
     //Store node pointers instead of storing the whole nodes
     Node** table = (Node**) malloc(SIZE * sizeof (Node*));
@@ -83,18 +84,35 @@ int main() {
 
     int choice;
     while ((choice = mainScreen())) {
-        if (choice == 1) {
-            //Add
-            addManga(table);
-        } else if (choice == 2) {
-            //Edit
-            editManga(table);
-        } else if (choice == 3) {
-            //Delete
-            if (deleteManga(table)) {
-                printf("\nDelete successful.\n");
-            } else {
-                printf("\nDelete failed.\n");
+        if (choice == 1 || choice == 2 || choice == 3) {
+            FLUSH;
+            printf("Checking Authority \nType Username: ");
+            char* username = getString();
+            printf("Type password: ");
+            char* password = getString();
+            if (strcmp(username, "Extrawork") == 0 &&
+                    strcmp(password, "extrawork") == 0) {
+                printf("\nConfirmed\n");
+                switch (choice) {
+                    case 1:
+                        //Add
+                        addManga(table);
+                        break;
+                    case 2:
+                        //Edit
+                        editManga(table);
+                        break;
+                    case 3:
+                        //Delete
+                        if (deleteManga(table)) {
+                            printf("\nDELETE SUCCESSFUL\n");
+                        } else {
+                            printf("\nDELETE FAILED\n");
+                        }
+                        break;
+                }
+            } else{
+                printf("\nEXCESS DENIED\n");
             }
         } else if (choice == 4) {
             //Search
@@ -195,13 +213,8 @@ void readFile(Node** table) {
         FLUSH;
 
 
-        // get  count
-        split = strtok(NULL, delim);
-        //printf("title %s\n", split);
-        new.count = (atoi(split));
-        FLUSH;
-        
-        
+
+
         add(table, new);
     }
 
@@ -212,15 +225,32 @@ void editManga(Node** table) {
     //First, search a Manga to edit.
     printf("Search a Manga to edit\n");
     Node* node = searchManga(table, 1);
-    const char* arr[] = {"title", "author", "genre", "publisher",
-    "used", "price", "count"};
-    for(int i = 0; i < 7; i++){
-        printf("%d - Edit %s\n", i+1, arr[i]);
+    int tryagain = 1;
+    while(node == NULL && tryagain){
+        printf("SEARCH FAILED. TRY SEARCH AGAIN? [y/n] \n");
+        FLUSH;
+        char c = getchar();
+        if(c == 'y'){
+           node = searchManga(table,1); 
+        } else if(c == 'n'){
+            tryagain = 0;
+        } else{
+            printf("INVALID OPTION. TRY AGAIN.\n");
+        }
     }
-    int choice;
-    scanf("%d", &choice);
-    FLUSH;
-    edit(choice, node);
+    if (node != NULL) {
+        const char* arr[] = {"title", "author", "genre", "publisher",
+            "used", "price"};
+        for (int i = 0; i < 6; i++) {
+            printf("%d - Edit %s\n", i + 1, arr[i]);
+        }
+        int choice;
+        scanf("%d", &choice);
+        FLUSH;
+        return edit(choice, node);
+    } else{
+        return false;
+    }
 }
 
 //Searching Manga from the hash table
@@ -290,9 +320,9 @@ void printAll(Node** table) {
 
 void printNode(Node* node) {
     printf("\nID: %d\nTitle: %s\nAuthor: %s\nGenre: %s\nPublisher: %s\n"
-            "Price: %lf\nCount: %d\n", node->manga.id, node->manga.title,
+            "Price: %.2lf\n", node->manga.id, node->manga.title,
             node->manga.author, node->manga.genre, node->manga.publisher,
-            node->manga.price, node->manga.count);
+            node->manga.price);
     if (node->manga.used) {
         printf("Used\n");
     } else {
@@ -359,7 +389,7 @@ Node* searchByID(Node** table, int id) {
     int key = divisionHash(id);
     Node* current = table[key];
     while (current != NULL) {
-        if (current->manga.id = id) {
+        if (current->manga.id == id) {
             return current;
         } else {
             current = current->next;
@@ -419,27 +449,34 @@ void addManga(Node** table) {
     }
     new.price = newPrice;
 
-    printf("Type the number of the book.\n");
-    int newCount;
-    scanf("%d", &newCount);
-    while (newCount < 0) {
-        printf("Negative value is invalid. Please type a positive value.\n");
-        scanf("%d", &newCount);
+    printf("\nADD: CONFIRMING...[y/n]\n");
+    char c = getchar();
+    checkYN(c);
+    if (c == 'y'){
+        add(table, new);
+        printf("\nNEW BOOK ADDED!\n");
+    } else{
+        printf("\nADD CANCELED\n");
     }
-    new.count = newCount;
+}
 
-    add(table, new);
-
-    printf("\nNew book added!\n");
+void checkYN(char c){
+    while (c != 'y' && c != 'n') {
+        printf("\nINVALID OPTION. y OR n \n");
+        FLUSH;
+        char c = getchar();
+    }
 }
 
 int mainScreen() {
     int a;
     printf("=============================================================\n");
-    printf("Welcome to Manga Shop!\n");
-    printf("=============================================================\n");
-    printf("===== 0 - Exit === 1 - Add === 2 - Edit === 3 - Delete ====\n");
-    printf("===== 4 - Search ==== 5 - Show All ==========================\n");
+    printf("=============== Welcome to Manga Shop! = ====================\n");
+    printf("======================= 0 - Exit  ===========================\n");
+    printf("================== ADMINISTRATOR OPTIONS ====================\n");
+    printf("============== 1 - Add === 2 - Edit === 3 - Delete ==========\n");
+    printf("======================== USER OPTIONS =======================\n");
+    printf("============== 4 - Search ==== 5 - Show All =================\n");
     printf("=============================================================\n");
     printf("Type an option: ");
     scanf("%d", &a);
@@ -513,46 +550,6 @@ bool edit(int choice, Node* node) {
         }
         node->manga.price = new;
         return true;
-    } else {
-        //Count
-        int choiceCount;
-        int amount;
-        printf("1 - Increase count\n2 - Decrease Count\n0 - Exit\n");
-        scanf("%d", choiceCount);
-        //Exit condition
-        if (choiceCount) {
-            return false;
-        }
-        while (choiceCount != 1 || choiceCount != 2) {
-            printf("1 or 2 are the only valid options. 0 - Exit.");
-            scanf("%d", choiceCount);
-            if (choiceCount) {
-                return false;
-            }
-        }
-        printf("How many?\n0 - Exit\n");
-        scanf("%d", amount);
-        //Exit condition
-        if (amount) {
-            return false;
-        }
-        //Validation
-        if (choiceCount == 2) {
-            while ((node->manga.count - amount) < 0) {
-                printf("Invalid amount. Please type again.\n0 - Exit\n");
-                scanf("%d", amount);
-                if (amount)
-                    return false;
-            }
-        }
-
-        if (choiceCount == 1) {
-            node->manga.count = node->manga.count + amount;
-            return true;
-        } else {
-            node->manga.count = node->manga.count - amount;
-            return true;
-        }
     }
 }
 
