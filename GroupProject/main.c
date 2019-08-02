@@ -37,12 +37,12 @@ void initializeTable(Node**);
 
 //Basic functions
 void add(Node**, Manga);
-bool edit(int, Node*);
+void edit(int, Node*);
 void delete(Node**, int);
 char* getString();
 void addManga(Node**);
 bool deleteManga(Node**);
-bool editManga(Node**);
+void editManga(Node**);
 
 //Print functions
 void printAll(Node**);
@@ -99,18 +99,14 @@ int main() {
                         break;
                     case 2:
                         //Edit
-                        if(editManga(table)){
-                            printf("EDIT SUCCESSFUL");
-                        }else{
-                            printf("EDIT FAILED");
-                        }
+                        editManga(table);
                         break;
                     case 3:
                         //Delete
                         if (deleteManga(table)) {
                             printf("\nDELETE SUCCESSFUL\n");
                         } else {
-                            printf("\nDELETE FAILED\n");
+                            printf("\nDELETE CANCELED\n");
                         }
                         break;
                 }
@@ -224,7 +220,7 @@ void readFile(Node** table) {
 
 }
 
-bool editManga(Node** table) {
+void editManga(Node** table) {
     //First, search a Manga to edit.
     printf("Search a Manga to edit\n");
     Node* node = searchManga(table, 1);
@@ -242,17 +238,25 @@ bool editManga(Node** table) {
         }
     }
     if (node != NULL) {
-        const char* arr[] = {"title", "author", "genre", "publisher",
-            "used", "price"};
-        for (int i = 0; i < 6; i++) {
-            printf("%d - Edit %s\n", i + 1, arr[i]);
-        }
-        int choice;
-        scanf("%d", &choice);
-        FLUSH;
-        return edit(choice, node);
-    } else{
-        return false;
+        char c;
+        do {
+            //Iterating edit() until user doesn't have anything to edit
+            const char* arr[] = {"title", "author", "genre", "publisher",
+                "used", "price"};
+            for (int i = 0; i < 6; i++) {
+                printf("%d - Edit %s\n", i + 1, arr[i]);
+            }
+            //Getting the user choice
+            int choice;
+            scanf("%d", &choice);
+            FLUSH;
+            
+            edit(choice, node);
+            printf("\nCONTINUE EDIT?[y/n] \n");
+            FLUSH;
+            c = getchar();
+            checkYN(c);
+        } while (c == 'y');
     }
 }
 
@@ -353,8 +357,15 @@ bool deleteManga(Node** table) {
         }
 
         if (searchByID(table, id) != NULL) {
-            delete(table, id);
-            return true;
+            printf("DELETE: CONFIRMING...");
+            char c = getchar();
+            checkYN(c);
+            if (c == 'y') {
+                delete(table, id);
+                return true;
+            } else{
+                return false;
+            }
         } else {
             return false;
         }
@@ -505,7 +516,7 @@ int mainScreen() {
  * 6 - price
  * 7 - count
  */
-bool edit(int choice, Node* node) {
+void edit(int choice, Node* node) {
     if (choice == 1 || choice == 2 || choice == 3 ||
             choice == 4) {
         if (choice == 1){
@@ -525,7 +536,7 @@ bool edit(int choice, Node* node) {
             printf("Type a new publisher for Manga\n");
         }
         char* new = getString();
-        printf("EDIT? [y/n]");
+        printf("EDIT? [y/n]\n");
         char c = getchar();
         checkYN(c);
         if (new != NULL && c == 'y') {
@@ -538,45 +549,34 @@ bool edit(int choice, Node* node) {
             } else {
                 node->manga.publisher = new;
             }
-            return true;
+            printf("\nEDIT SUCCESSFUL\n");
         } else {
-            return false;
+            printf("\nEDIT CANCELED\n");
         }
     } else if (choice == 5) {
         //Change used
-        printf("EDIT? [y/n]");
+        printf("EDIT? [y/n]\n");
         char c = getchar();
         checkYN(c);
         if (c == 'y') {
             node->manga.used = !node->manga.used;
-            printf("%s", node->manga.used ? "CHANGED FROM NEW TO USED" :
-                    "CHANGED FROM USED TO NEW");
-            return true;
-        } else
-            return false;
+            printf("%s", node->manga.used ? "\nCHANGED FROM NEW TO USED\n" :
+                    "\nCHANGED FROM USED TO NEW\n");
+        }
     } else if (choice == 6) {
         //Price
         double new;
-        printf("Type a new price for Manga.\n-999 - Exit\n");
-        scanf("%lf", &new);
-        if (new == -999) {
-            return false;
-        }
+        printf("Type a new price for Manga.\n");
         while (new < 0.0) {
-            printf("Negative value is not a valid price. Type again. -999 - Exit");
+            printf("Negative value is not a valid price.\n");
             scanf("%lf", &new);
-            if (new == -999) {
-                return false;
-            }
         }
-        printf("EDIT? [y/n]");
+        printf("EDIT? [y/n]\n");
         char c = getchar();
         checkYN(c);
         if (c == 'y') {
             node->manga.price = new;
-            return true;
         }
-        else return false;
     }
 }
 
