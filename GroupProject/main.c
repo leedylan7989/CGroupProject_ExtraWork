@@ -46,7 +46,7 @@ void delete(Node**, int);
 char* getString();
 void addManga(Node**);
 bool deleteManga(Node**);
-void editManga(Node**);
+bool editManga(Node**);
 void printAll(Node**);
 void printNode(Node*);
 
@@ -67,6 +67,7 @@ void freeTable(Node***);
 void freeList(Node**);
 void freeNode(Node**);
 
+//Function for other functions
 void checkYN(char);
 
 int main() {
@@ -100,7 +101,11 @@ int main() {
                         break;
                     case 2:
                         //Edit
-                        editManga(table);
+                        if(editManga(table)){
+                            printf("EDIT SUCCESSFUL");
+                        }else{
+                            printf("EDIT FAILED");
+                        }
                         break;
                     case 3:
                         //Delete
@@ -221,7 +226,7 @@ void readFile(Node** table) {
 
 }
 
-void editManga(Node** table) {
+bool editManga(Node** table) {
     //First, search a Manga to edit.
     printf("Search a Manga to edit\n");
     Node* node = searchManga(table, 1);
