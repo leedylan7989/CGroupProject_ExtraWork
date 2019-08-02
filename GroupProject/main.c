@@ -514,7 +514,10 @@ bool edit(int choice, Node* node) {
         else
             printf("Type a new publisher for Manga\n");
         char* new = getString();
-        if (new != NULL) {
+        printf("EDIT? [y/n]");
+        char c = getchar();
+        checkYN(c);
+        if (new != NULL && c == 'y') {
             if (choice == 1)
                 node->manga.title = new;
             else if (choice == 2)
@@ -529,10 +532,16 @@ bool edit(int choice, Node* node) {
         }
     } else if (choice == 5) {
         //Change used
-        node->manga.used = !node->manga.used;
-        printf("%s", node->manga.used ? "Changed from false to true" :
-                "Changed from true to false");
-        return true;
+        printf("EDIT? [y/n]");
+        char c = getchar();
+        checkYN(c);
+        if (c == 'y') {
+            node->manga.used = !node->manga.used;
+            printf("%s", node->manga.used ? "CHANGED FROM NEW TO USED" :
+                    "CHANGED FROM USED TO NEW");
+            return true;
+        } else
+            return false;
     } else if (choice == 6) {
         //Price
         double new;
@@ -548,8 +557,14 @@ bool edit(int choice, Node* node) {
                 return false;
             }
         }
-        node->manga.price = new;
-        return true;
+        printf("EDIT? [y/n]");
+        char c = getchar();
+        checkYN(c);
+        if (c == 'y') {
+            node->manga.price = new;
+            return true;
+        }
+        else return false;
     }
 }
 
