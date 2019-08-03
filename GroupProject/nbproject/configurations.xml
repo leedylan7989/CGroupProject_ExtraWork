@@ -4,6 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>bookfunctions.h</itemPath>
+      <itemPath>fileIO.h</itemPath>
+      <itemPath>freefunctions.h</itemPath>
+      <itemPath>getInput.h</itemPath>
+      <itemPath>hashbasic.h</itemPath>
+      <itemPath>hashtable.h</itemPath>
+      <itemPath>print.h</itemPath>
+      <itemPath>search.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,7 +20,15 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>bookfunctions.c</itemPath>
+      <itemPath>fileIO.c</itemPath>
+      <itemPath>freefunctions.c</itemPath>
+      <itemPath>getInput.c</itemPath>
+      <itemPath>hashbasic.c</itemPath>
+      <itemPath>hashtable.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>print.c</itemPath>
+      <itemPath>search.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -36,7 +52,39 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="bookfunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bookfunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fileIO.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fileIO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="freefunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="freefunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="getInput.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="getInput.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hashbasic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hashbasic.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hashtable.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hashtable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="print.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="print.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="search.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="search.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -59,7 +107,39 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="bookfunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bookfunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fileIO.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fileIO.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="freefunctions.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="freefunctions.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="getInput.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="getInput.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hashbasic.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hashbasic.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="hashtable.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="hashtable.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="print.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="print.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="search.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="search.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
