@@ -1,6 +1,6 @@
 build/Debug/Cygwin-Windows/bookfunctions.o: bookfunctions.c \
- bookfunctions.h hashtable.h hashbasic.h getInput.h freefunctions.h \
- print.h
+ bookfunctions.h hashtable.h hashbasic.h extra.h print.h freefunctions.h \
+ tree.h search.h
 
 bookfunctions.h:
 
@@ -8,8 +8,12 @@ hashtable.h:
 
 hashbasic.h:
 
-getInput.h:
+extra.h:
+
+print.h:
 
 freefunctions.h:
 
-print.h:
+tree.h:
+
+search.h:

@@ -1,5 +1,5 @@
 
-#include "getInput.h"
+#include "extra.h"
 //Heon Lee
 //This function waits for user input
 //and allocates the input to Heap
@@ -28,7 +28,9 @@ char* getString() {
 
 void checkYN(char c){
     while (c != 'y' && c != 'n') {
+        printLine();
         printf("\nINVALID OPTION. y OR n \n");
+        printLine();
         FLUSH;
         char c = getchar();
     }

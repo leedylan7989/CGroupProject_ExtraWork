@@ -50,3 +50,17 @@ void freeTable(Node*** table) {
     }
     free(*table);
 }
+
+void freeTree(TreeNode* node){
+    //Uses post order
+    //For each node
+    if(node != NULL){
+        //Traverse to left subtree
+        freeTree(node->left);
+        //Then, traverse to the right subtree
+        freeTree(node->right);
+        //If left and right subtrees are free,
+        //free this node
+        free(node);
+    }
+}

@@ -73,24 +73,32 @@ void delete(Node** table, int id) {
 void edit(int choice, Node* node) {
     if (choice == 1 || choice == 2 || choice == 3 ||
             choice == 4) {
-        if (choice == 1){
-                printf("\nOLD VALUE: %s\n", node->manga.title);
+        if (choice == 1) {
+            printLine();
+            printf("\nOLD VALUE: %s\n", node->manga.title);
             printf("Type a new title for Manga\n");
-        }
-        else if (choice == 2){
-                printf("\nOLD VALUE: %s\n", node->manga.author);
+            printLine();
+        } else if (choice == 2) {
+            printLine();
+            printf("\nOLD VALUE: %s\n", node->manga.author);
             printf("Type a new author for Manga\n");
-        }
-        else if (choice == 3){
-                printf("\nOLD VALUE: %s\n", node->manga.genre);
+            printLine();
+        } else if (choice == 3) {
+            printLine();
+            printf("\nOLD VALUE: %s\n", node->manga.genre);
             printf("Type a new genre for Manga\n");
-        }
-        else{
-                printf("\nOLD VALUE: %s\n", node->manga.publisher);
+            printLine();
+        } else {
+            printLine();
+            printf("\nOLD VALUE: %s\n", node->manga.publisher);
             printf("Type a new publisher for Manga\n");
+            printLine();
         }
         char* new = getString();
+        printLine();
         printf("EDIT? [y/n]\n");
+        printLine();
+        FLUSH;
         char c = getchar();
         checkYN(c);
         if (new != NULL && c == 'y') {
@@ -103,29 +111,46 @@ void edit(int choice, Node* node) {
             } else {
                 node->manga.publisher = new;
             }
+            printLine();
             printf("\nEDIT SUCCESSFUL\n");
+            printLine();
         } else {
+            printLine();
             printf("\nEDIT CANCELED\n");
+            printLine();
         }
     } else if (choice == 5) {
         //Change used
+        printLine();
         printf("EDIT? [y/n]\n");
+        printLine();
+        FLUSH;
         char c = getchar();
         checkYN(c);
         if (c == 'y') {
             node->manga.used = !node->manga.used;
+            printLine();
             printf("%s", node->manga.used ? "\nCHANGED FROM NEW TO USED\n" :
                     "\nCHANGED FROM USED TO NEW\n");
+            printLine();
         }
     } else if (choice == 6) {
         //Price
         double new;
+        printLine();
         printf("Type a new price for Manga.\n");
+        printLine();
+        scanf("%lf", &new);
         while (new < 0.0) {
+            printLine();
             printf("Negative value is not a valid price.\n");
+            printLine();
             scanf("%lf", &new);
         }
+        printLine();
         printf("EDIT? [y/n]\n");
+        printLine();
+        FLUSH;
         char c = getchar();
         checkYN(c);
         if (c == 'y') {

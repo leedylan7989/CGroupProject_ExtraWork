@@ -8,6 +8,7 @@
 #include "hashtable.h"
 #include "hashbasic.h"
 #include "print.h"
+#include "extra.h"
 
 
 #define FLUSH stdin=freopen(NULL,"r",stdin)

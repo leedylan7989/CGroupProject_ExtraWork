@@ -5,30 +5,22 @@
 #include <string.h>
 #include "hashtable.h"
 #include "fileIO.h"
-#include "hashbasic.h"
-#include "getInput.h"
+#include "extra.h"
 #include "freefunctions.h"
 #include "print.h"
 #include "bookfunctions.h"
 #include "search.h"
+#include "tree.h"
 
 #define FLUSH stdin=freopen(NULL,"r",stdin)
 
-
-typedef struct treenode{
-    Node* value;
-    struct treenode *left, *right;
-}TreeNode;
-
-//IO
-void writeFile();
 
 //Screens
 int mainScreen();
 
 //Additional functionality
 void filterByGenre(Node**);
-void sort(Node**);
+
 
 int main() {
     //Store node pointers instead of storing the whole nodes
@@ -48,13 +40,18 @@ int main() {
     while ((choice = mainScreen())) {
         if (choice == 1 || choice == 2 || choice == 3) {
             FLUSH;
-            printf("Checking Authority \nType Username: ");
+            printLine();
+            printf("Checking Authority \n");
+            printLine();
+            printf("Type Username: ");
             char* username = getString();
             printf("Type password: ");
             char* password = getString();
             if (strcmp(username, "Extrawork") == 0 &&
                     strcmp(password, "extrawork") == 0) {
+                printLine();
                 printf("\nConfirmed\n");
+                printLine();
                 switch (choice) {
                     case 1:
                         //Add
@@ -66,15 +63,13 @@ int main() {
                         break;
                     case 3:
                         //Delete
-                        if (deleteManga(table)) {
-                            printf("\nDELETE SUCCESSFUL\n");
-                        } else {
-                            printf("\nDELETE CANCELED\n");
-                        }
+                        deleteManga(table);
                         break;
                 }
             } else{
+                printLine();
                 printf("\nEXCESS DENIED\n");
+                printLine();
             }
         } else if (choice == 4) {
             //Search
@@ -86,22 +81,27 @@ int main() {
         }
     }
 
-
     
-    //writeFile(table);
+    
+    TreeNode* root = NULL;
+    
+    generateTree(table, &root, -1, 39, 0);
+    generateTree(table, &root, 1, 40, SIZE);
+    
+    //writeFile(root);
 
 
+    printLine();
     printf("Thanks for using our shop!\n");
+    printLine();
     freeTable(&table);
+    freeTree(root);
 
 
 
     return 0;
 
 }
-
-
-
 
 int mainScreen() {
     int a;
@@ -114,10 +114,14 @@ int mainScreen() {
     printf("============== 4 - Search ==== 5 - Show All =================\n");
     printf("=============================================================\n");
     printf("Type an option: ");
+    FLUSH;
     scanf("%d", &a);
     while (a != 1 && a != 2 && a != 3 && a != 4 && a != 0 && a != 5) {
-        printf("Invalid Options. Please select a correct option.\n"
-                "Type an option: ");
+        printf("\n");
+        printLine();
+        printf("Invalid Options. Please select a correct option.\n");
+        printLine();
+        printf("Type an option: ");
         scanf("%d", &a);
     }
 

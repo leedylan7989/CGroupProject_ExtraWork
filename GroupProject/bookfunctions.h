@@ -8,12 +8,15 @@
 #include "hashtable.h"
 #include "hashbasic.h"
 #include <string.h>
-#include "getInput.h"
+#include "extra.h"
 #include "freefunctions.h"
 #include "print.h"
+#include "search.h"
+
+#define FLUSH stdin=freopen(NULL,"r",stdin)
 
 void addManga(Node**);
-bool deleteManga(Node**);
+void deleteManga(Node**);
 void editManga(Node**);
 
 

@@ -11,48 +11,61 @@
 
 Node* searchManga(Node** table, int select) {
     //Search
+    printLine();
     printf("\n1 - Search by ID\n2 - Search by Title\n");
     int choice;
+    printLine();
     scanf("%d", &choice);
+    FLUSH;
     while (choice != 1 && choice != 2) {
+        printLine();
         printf("Please select the valid options.\n");
-        scanf("%d", choice);
+        printLine();
+        scanf("%d", &choice);
+        FLUSH;
     }
 
-    FLUSH;
-
+    Node* node = NULL;
     if (choice == 1) {
+        printLine();
         printf("Type the ID you want to search.\n");
+        printLine();
         int id;
         scanf("%d", &id);
         while (id < 0) {
+            printLine();
             printf("Please select a valid id.\n");
+            printLine();
             scanf("%d", &id);
         }
-        Node* node = searchByID(table, id);
+        node = searchByID(table, id);
         if (node != NULL) {
             printNode(node);
         } else {
+            printLine();
             printf("\nSEARCH FAILED. ID NOT FOUND.\n");
+            printLine();
         }
-
-        if (select)
-            return node;
     } else if (choice == 2) {
+        printLine();
         printf("Type the title you want to search.\n");
+        printLine();
         char* title = getString();
 
-        Node* node = searchByTitle(table, title);
+        node = searchByTitle(table, title);
         if (node != NULL) {
             printNode(node);
         } else {
+            printLine();
             printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
+            printLine();
         }
-        if (select)
-            return node;
     }
-
-    return NULL;
+    
+    if (select)
+        return node;
+    else
+        return NULL;
 }
 
 Node* searchByTitle(Node** table, char* title) {

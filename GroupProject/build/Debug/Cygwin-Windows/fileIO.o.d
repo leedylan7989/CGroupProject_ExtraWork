@@ -1,12 +1,16 @@
 build/Debug/Cygwin-Windows/fileIO.o: fileIO.c fileIO.h hashtable.h \
- getInput.h hashbasic.h freefunctions.h
+ extra.h print.h hashbasic.h freefunctions.h tree.h
 
 fileIO.h:
 
 hashtable.h:
 
-getInput.h:
+extra.h:
+
+print.h:
 
 hashbasic.h:
 
 freefunctions.h:
+
+tree.h:

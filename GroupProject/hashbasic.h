@@ -2,10 +2,13 @@
 #ifndef HASHBASIC_H
 #define HASHBASIC_H
 #include "hashtable.h"
-#include "getInput.h"
+#include "extra.h"
 #include "freefunctions.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+
+#define FLUSH stdin=freopen(NULL,"r",stdin)
 
 //Basic functions
 void add(Node**, Manga);

@@ -8,6 +8,7 @@
 //Print functions
 void printAll(Node**);
 void printNode(Node*);
+void printLine();
 
 
 #endif /* PRINT_H */
