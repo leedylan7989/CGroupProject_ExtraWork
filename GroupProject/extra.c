@@ -25,7 +25,11 @@ char* getString() {
 }
 
 
-
+/*
+ * Parameter: c - a character to check
+ * If a character is not 'y' or 'n', then the function
+ * asks again until the user types 'y' or 'n'.
+ */
 void checkYN(char c){
     while (c != 'y' && c != 'n') {
         printLine();
@@ -33,5 +37,46 @@ void checkYN(char c){
         printLine();
         FLUSH;
         char c = getchar();
+    }
+}
+
+int characterToIndex(char c) {
+    if ((c >= 65 && c <= 90) || (c >= 97 && c <= 112)) {
+        //a - z A - Z
+        for (int i = 0; i < 26; i++) {
+            if (c == 65 + i || c == 97 + i) {
+                return i;
+            }
+        }
+    }
+
+    //Other special characters and numbers
+    return 26;
+}
+
+int boolToIndex(bool c) {
+    //false == 0, true == 1
+    int i = c;
+    return i;
+}
+
+Node* buildList(Node* head, Node* node){
+    if(head == NULL){
+        return node;
+    }
+    Node* current = head;
+    while(current->nextList != NULL){
+        current = current->nextList;
+    }
+    current->nextList = node;
+    return head;
+    
+}
+
+
+void clearList(Node* head){
+    if(head != NULL){
+        clearList(head->nextList);
+        head->nextList = NULL;
     }
 }

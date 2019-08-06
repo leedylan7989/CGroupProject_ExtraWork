@@ -9,17 +9,19 @@
 //when a caller needs to retreive
 //a selected record.
 
-Node* searchManga(Node** table, int select) {
+Node* searchManga(Node** table, Node*** list, int retrieve) {
     //Search
     printLine();
-    printf("\n1 - Search by ID\n2 - Search by Title\n");
+    printf("1 - Search by ID\n2 - Search by Title\n");
+    printf("3 - Search by Author\n4 - Search by Genre\n");
+    printf("5 - Search by Publisher\n6 - Search Used/New\n");
     int choice;
     printLine();
     scanf("%d", &choice);
     FLUSH;
-    while (choice != 1 && choice != 2) {
+    while (choice < 1 && choice > 6) {
         printLine();
-        printf("Please select the valid options.\n");
+        printf("Please select the valid options. [1-6]\n");
         printLine();
         scanf("%d", &choice);
         FLUSH;
@@ -46,15 +48,24 @@ Node* searchManga(Node** table, int select) {
             printf("\nSEARCH FAILED. ID NOT FOUND.\n");
             printLine();
         }
-    } else if (choice == 2) {
+    } else if (choice >= 2 && choice < 7) {
         printLine();
-        printf("Type the title you want to search.\n");
+        if(choice == 2)
+            printf("Type the title you want to search.\n");
+        else if (choice == 3)
+            printf("Type the author you want to search.\n");
+        else if (choice == 4)
+            printf("Type the genre you want to search.\n");
+        else if (choice == 5)
+            printf("Type the publisher you want to search.\n");
+        else if (choice == 6)
+            printf("Type 'used' for used books and 'new' for new books\n");
         printLine();
-        char* title = getString();
+        char* searchString = getString();
 
-        node = searchByTitle(table, title);
+        node = searchDictionary(list[choice-2], searchString, choice-2);
         if (node != NULL) {
-            printNode(node);
+            printList(node);
         } else {
             printLine();
             printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
@@ -62,25 +73,76 @@ Node* searchManga(Node** table, int select) {
         }
     }
     
-    if (select)
-        return node;
-    else
-        return NULL;
+    if (node != NULL && choice != 1 && retrieve){
+        printLine();
+        printf("\nSELECT ONE BOOK AND TYPE THE ID.\n");
+        printLine();
+        int id;
+        FLUSH;
+        do {
+            scanf("%d", &id);
+            FLUSH;
+            node = searchByID(table, id);
+            if(node == NULL){
+                printLine();
+                printf("ID NOT FOUND. PLEASE CHOOSE ANOTHER ID.\n");
+                printLine();
+            }
+        } while (node == NULL);
+    }
+    
+    clearList(node);
+    
+    return node;
 }
 
-Node* searchByTitle(Node** table, char* title) {
-    Node* current = NULL;
-    for (int i = 0; i < SIZE; i++) {
-        current = table[i];
-        while (current != NULL) {
-            if (strcmp(current->manga.title, title) == 0) {
-                return current;
-            } else {
-                current = current->next;
+Node* searchDictionary(Node** dictionary, char* searchString, int num) {
+    int index;
+    if (num == 4) {
+        if(strcmp("used", searchString) == 0){
+            index = 1;
+        } else if(strcmp("new", searchString) == 0){
+            index = 0;
+        } else {
+            printLine();
+            printf("PLEASE TYPE EITHER 'used' OR 'new'. RETURNING TO THE MENU\n");
+            printLine();
+            return NULL;
+        }
+    } else {
+        index = characterToIndex(searchString[0]);
+    }
+    
+    Node* head = NULL;
+    Node* current = dictionary[index];
+    while (current != NULL) {
+        if (num == 0) {//Title
+            if (strcmp(current->manga.title, searchString) == 0) {
+                head = buildList(head, current);
             }
+            current = current->nextTitle;
+        } else if (num == 1) {//Author
+            if (strcmp(current->manga.author, searchString) == 0) {
+                head = buildList(head, current);
+            }
+            current = current->nextAuthor;
+        } else if (num == 2) { //Genre
+            if (strstr(current->manga.genre, searchString) != NULL) {
+                head = buildList(head, current);
+            }
+            current = current->nextGenre;
+        } else if (num == 3) {//Publisher
+            if (strcmp(current->manga.publisher, searchString) == 0) {
+                head = buildList(head, current);
+            }
+            current = current->nextPublisher;
+        } else if (num == 4) {//Used
+            head = buildList(head, current);
+            current = current->nextUsed;
         }
     }
-    return current;
+    
+    return head;
 }
 
 Node* searchByID(Node** table, int id) {

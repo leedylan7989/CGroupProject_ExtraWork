@@ -1,7 +1,8 @@
 #include "freefunctions.h"
-//Heon Lee
-//Frees a single Node
 
+//Heon Lee
+//Frees a single Node as well as any allocated field
+//in the node
 void freeNode(Node** node) {
     if ((*node)->manga.author != NULL) {
         free((*node)->manga.author);
@@ -51,6 +52,13 @@ void freeTable(Node*** table) {
     free(*table);
 }
 
+/*
+ * Frees a tree. 
+ * This function only frees TreeNode because
+ * freeTable function will free all nodes.
+ * 
+ * freeTable function will always get called first.
+ */
 void freeTree(TreeNode* node){
     //Uses post order
     //For each node
@@ -63,4 +71,12 @@ void freeTree(TreeNode* node){
         //free this node
         free(node);
     }
+}
+
+
+void freeDictionary(Node*** list){
+    for(int i = 0; i < 5; i++){
+        free(list[i]);
+    }
+    free(list);
 }

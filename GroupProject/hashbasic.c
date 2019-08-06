@@ -1,9 +1,9 @@
 
 #include "hashbasic.h"
-
 //Heon Lee
-
-void add(Node** table, Manga manga) {
+//This function creates and initializes a node with
+//given book object
+void add(Node** table, Node*** list, Manga manga) {
     int key = divisionHash(manga.id);
     Node* temp = (Node*) malloc(sizeof (Node));
     //If temp is NULL
@@ -12,6 +12,12 @@ void add(Node** table, Manga manga) {
     }
     temp->manga = manga;
     temp->next = NULL;
+    temp->nextGenre = NULL;
+    temp->nextTitle = NULL;
+    temp->nextPublisher = NULL;
+    temp->nextList = NULL;
+    temp->nextUsed = NULL;
+    temp->nextAuthor = NULL;
     if (table[key] == NULL) {
         table[key] = temp;
     } else {
@@ -21,10 +27,18 @@ void add(Node** table, Manga manga) {
         }
         current->next = temp;
     }
+    //Add to dictionary after adding to table
+    if (list != NULL) {
+        for (int i = 0; i < 5; i++) {
+            addDictionary(temp, list[i], i);
+        }
+    }
 }
 
 //Heon Lee
-
+//Parameter: table - hash table, id - id to delete
+//This function deletes a node with selected id from the hash table
+//Callers make sure that the node with the id exists in the table
 void delete(Node** table, int id) {
     int key = divisionHash(id);
     bool found = false;
@@ -56,6 +70,7 @@ void delete(Node** table, int id) {
         freeNode(&current);
     }
 }
+
 
 //Heon Lee
 //A caller records a user's choice in an int variable

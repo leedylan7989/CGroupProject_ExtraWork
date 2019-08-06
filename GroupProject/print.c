@@ -9,7 +9,6 @@ void printAll(Node** table) {
         while (current != NULL) {
             printNode(current);
             current = current->next;
-            printf("-------------------------------------------\n");
         }
     }
 }
@@ -28,6 +27,12 @@ void printNode(Node* node) {
     printLine();
 }
 
+void printList(Node* head){
+    while(head != NULL){
+        printNode(head);
+        head = head->nextList;
+    }
+}
 void printLine(){
     printf("=============================================================\n");
 }

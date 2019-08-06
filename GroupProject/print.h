@@ -9,6 +9,7 @@
 void printAll(Node**);
 void printNode(Node*);
 void printLine();
+void printList(Node*);
 
 
 #endif /* PRINT_H */

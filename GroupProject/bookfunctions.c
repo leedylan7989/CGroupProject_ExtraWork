@@ -1,11 +1,19 @@
 #include "bookfunctions.h"
 
-void editManga(Node** table) {
+/*
+ * Parameter: table - hash table
+ * This function contains necessary UIs for edit and
+ * calls search function to search for a node.
+ * If a node is found, the function calls edit() function to 
+ * edit the searched node.
+ * If not found, a message will be prompted and the function will exit.
+ */
+void editManga(Node** table, Node*** list) {
     //First, search a Manga to edit.
     printLine();
     printf("Search a Manga to edit\n");
     printLine();
-    Node* node = searchManga(table, 1);
+    Node* node = searchManga(table, list, 1);
     int tryagain = 1;
     while(node == NULL && tryagain){
         printLine();
@@ -14,7 +22,7 @@ void editManga(Node** table) {
         FLUSH;
         char c = getchar();
         if(c == 'y'){
-           node = searchManga(table,1); 
+           node = searchManga(table, list, 1); 
         } else if(c == 'n'){
             tryagain = 0;
         } else{
@@ -53,93 +61,60 @@ void editManga(Node** table) {
 
 
 
-void deleteManga(Node** table) {
+/*
+ * Parameter: table - hash table
+ * This function contains necessary UIs for delete.
+ * This function calls search function to search for a node with 
+ * a user's search criteria.
+ * Then, calls delete() function to delete the node.
+ * If the search criteria does not exist in the table, prompts
+ * a message. 
+ */
+void deleteManga(Node** table, Node*** list) {
     printLine();
-    printf("Which Manga do you want to delete?\n"
-            "1 - Search by ID\n2 - Search by Title\n");
+    printf("Search the Manga you want to delete\n");
     printLine();
-    int choice;
-    scanf("%d", &choice);
-    while (choice != 1 && choice != 2) {
+    
+    Node* node = searchManga(table, list, 1);
+    if (node == NULL) {
+        //If the book is not found,
+        //return the control to the caller.
         printLine();
-        printf("Please select the valid options.\n");
+        printf("BOOK NOT FOUND\n");
         printLine();
-        scanf("%d", choice);
+        return;
     }
-
-    if (choice == 1) {
-        printLine();
-        printf("Type the ID you want to delete.\n");
-        printLine();
-        int id;
-        scanf("%d", &id);
-        while (id < 0) {
-            printLine();
-            printf("Please select a valid id.\n");
-            printLine();
-            scanf("%d", &id);
+    printNode(node);
+    printLine();
+    printf("DELETE: CONFIRMING...[y/n]\n");
+    printLine();
+    FLUSH;
+    char c = getchar();
+    checkYN(c);
+    if (c == 'y') {
+        //Delete from dictionary before deleting from the table
+        for(int i = 0; i < 5; i++){
+            deleteDictionary(list[i], node, i);
         }
-        
-        Node* node = NULL;
-        if ((node = searchByID(table, id)) != NULL) {
-            printNode(node);
-            printLine();
-            printf("DELETE: CONFIRMING...[y/n]\n");
-            printLine();
-            FLUSH;
-            char c = getchar();
-            checkYN(c);
-            if (c == 'y') {
-                delete(table, id);
-                printLine();
-                printf("\nDELETE SUCCESSFUL\n");
-                printLine();
-            } else {
-                printLine();
-                printf("\nDELETE CANCELED\n");
-                printLine();
-            }
-        } else {
-            printLine();
-            printf("BOOK NOT FOUND\n");
-            printLine();
-        }
-    } else if (choice == 2) {
+        delete(table, node->manga.id);
         printLine();
-        printf("Type the title you want to delete.\n");
+        printf("\nDELETE SUCCESSFUL\n");
         printLine();
-        FLUSH;
-        char* deleteTitle = getString();
-
-        Node* node = searchByTitle(table, deleteTitle);
-        if (node != NULL) {
-            printNode(node);
-            printLine();
-            printf("DELETE: CONFIRMING...[y/n]\n");
-            printLine();
-            FLUSH;
-            char c = getchar();
-            checkYN(c);
-            if (c == 'y') {
-                delete(table, node->manga.id);
-                printLine();
-                printf("\nDELETE SUCCESSFUL\n");
-                printLine();
-            } else {
-                printLine();
-                printf("\nDELETE CANCELED\n");
-                printLine();
-            }
-        } else {
-            printLine();
-            printf("BOOK NOT FOUND\n");
-            printLine();
-        }
+    } else {
+        printLine();
+        printf("\nDELETE CANCELED\n");
+        printLine();
     }
 }
 
-
-void addManga(Node** table) {
+/*
+ * Parameter: table - hash table
+ * This function contains necessary UIs for add.
+ * This function asks for new book's information to a user.
+ * Then, creates a new book object with the information and
+ * calls add() function to add a node to the table.
+ */
+void addManga(Node** table, Node*** list) {
     Manga new;
     int id;
     printLine();
@@ -212,7 +187,7 @@ void addManga(Node** table) {
     char c = getchar();
     checkYN(c);
     if (c == 'y'){
-        add(table, new);
+        add(table, list, new);
         printLine();
         printf("\nNEW BOOK ADDED!\n");
         printLine();
@@ -220,5 +195,38 @@ void addManga(Node** table) {
         printLine();
         printf("\nADD CANCELED\n");
         printLine();
+    }
+}
+
+void purchaseManga(Node** table, Node*** dictionaryList) {
+    printLine();
+    printf("Search a book to purchase\n");
+    printLine();
+    Node* book = searchManga(table, dictionaryList, 1);
+    if (book == NULL) {
+        printLine();
+        printf("PURCHASE FAILED\n");
+        printLine();
+    } else {
+        printLine();
+        printf("%d: PURCHASE CONFIRMING...[y/n]\n", book->manga.id);
+        printLine();
+        FLUSH;
+        char c = getchar();
+        checkYN(c);
+        if (c == 'y') {
+            //Delete from dictionary before deleting from the table
+            for (int i = 0; i < 5; i++) {
+                deleteDictionary(dictionaryList[i], book, i);
+            }
+            delete(table, book->manga.id);
+            printLine();
+            printf("PURCHASE COMPLETED\n");
+            printLine();
+        } else {
+            printLine();
+            printf("PURCHASE CANCELED\n");
+            printLine();
+        }
     }
 }

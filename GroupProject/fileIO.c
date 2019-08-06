@@ -80,7 +80,7 @@ void readFile(Node** table) {
 
 
 
-        add(table, new);
+        add(table, NULL, new);
     }
 
 

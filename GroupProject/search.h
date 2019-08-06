@@ -9,14 +9,15 @@
 #include "hashbasic.h"
 #include "print.h"
 #include "extra.h"
+#include "dictionary.h"
 
 
 #define FLUSH stdin=freopen(NULL,"r",stdin)
 
 //Search
-Node* searchManga(Node**, int);
+Node* searchManga(Node**, Node***, int);
 Node* searchByID(Node**, int);
-Node* searchByTitle(Node**, char*);
+Node* searchDictionary(Node**, char*, int);
 
 #endif /* SEARCH_H */
 

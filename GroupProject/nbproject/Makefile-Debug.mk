@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/bookfunctions.o \
+	${OBJECTDIR}/dictionary.o \
 	${OBJECTDIR}/extra.o \
 	${OBJECTDIR}/fileIO.o \
 	${OBJECTDIR}/freefunctions.o \
@@ -75,6 +76,11 @@ ${OBJECTDIR}/bookfunctions.o: bookfunctions.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bookfunctions.o bookfunctions.c
+
+${OBJECTDIR}/dictionary.o: dictionary.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dictionary.o dictionary.c
 
 ${OBJECTDIR}/extra.o: extra.c
 	${MKDIR} -p ${OBJECTDIR}
