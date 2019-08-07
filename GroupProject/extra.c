@@ -76,7 +76,6 @@ Node* buildList(Node* head, Node* node){
 
 void clearList(Node* head){
     if(head != NULL){
-        printf("%s\n", head->manga.title);
         clearList(head->nextList);
         head->nextList = NULL;
     }

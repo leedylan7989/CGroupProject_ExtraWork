@@ -72,7 +72,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printLine();
         }
     }
-    
+    Node* head = node;
     if (node != NULL && choice != 1 && retrieve){
         printLine();
         printf("\nSELECT ONE BOOK AND TYPE THE ID.\n");
@@ -91,7 +91,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
         } while (node == NULL);
     }
     
-    clearList(node);
+    clearList(head);
     
     return node;
 }

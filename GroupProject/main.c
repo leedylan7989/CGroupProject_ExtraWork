@@ -19,9 +19,6 @@
 //Screens
 int mainScreen();
 
-//Additional functionality
-void filterByGenre(Node**);
-
 
 int main() {
     //Store node pointers instead of storing the whole nodes
