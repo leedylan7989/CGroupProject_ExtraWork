@@ -99,9 +99,11 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
 Node* searchDictionary(Node** dictionary, char* searchString, int num) {
     int index;
     if (num == 4) {
-        if(strcmp("used", searchString) == 0){
+        if(strcmp("used", searchString) == 0 || 
+                strcmp("Used", searchString) == 0){
             index = 1;
-        } else if(strcmp("new", searchString) == 0){
+        } else if(strcmp("new", searchString) == 0 || 
+                strcmp("New", searchString) == 0){
             index = 0;
         } else {
             printLine();

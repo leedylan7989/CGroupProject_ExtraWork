@@ -150,6 +150,7 @@ int mainScreen() {
         printLine();
         printf("Invalid Options. Please select a correct option.\n");
         printLine();
+        FLUSH;
         printf("Type an option: ");
         scanf("%d", &a);
     }
