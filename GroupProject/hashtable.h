@@ -18,6 +18,7 @@ typedef struct {
 
 typedef struct node {
     Manga manga;
+    int search;
     struct node* next;
     //Used for title dictionary
     struct node* nextTitle;

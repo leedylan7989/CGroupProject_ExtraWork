@@ -14,10 +14,11 @@ void editManga(Node** table, Node*** list) {
     printf("Search a Manga to edit\n");
     printLine();
     Node* node = searchManga(table, list, 1);
-    if(!strcmp(node->manga.title,"search is canceled from searchManga")){
+    if(node->search == 0){
         printLine();
         printf("EDIT CANCELED\n");
         printLine();
+        free(node);
         return;
     }
     int tryagain = 1;
@@ -91,12 +92,14 @@ void deleteManga(Node** table, Node*** list) {
         return;
     }
     
-    if(!strcmp(node->manga.title,"search is canceled from searchManga")){
+    if(node->search == 0){
         printLine();
         printf("DELETE CANCELED\n");
         printLine();
+        free(node);
         return;
     }
+    
     printNode(node);
     printLine();
     printf("DELETE: CONFIRMING...[y/n]\n");
@@ -135,6 +138,7 @@ void addManga(Node** table, Node*** list) {
     printLine();
     scanf("%d", &id);
     while (searchByID(table, id) != NULL) {
+        FLUSH;
         printLine();
         printf("ID exists. Please type a new ID.\n");
         printLine();
@@ -216,10 +220,11 @@ void purchaseManga(Node** table, Node*** dictionaryList) {
     printf("Search a book to purchase\n");
     printLine();
     Node* book = searchManga(table, dictionaryList, 1);
-    if(!strcmp(book->manga.title,"search is canceled from searchManga")){
+    if(book->search == 0){
         printLine();
         printf("PURCHASE CANCELED\n");
         printLine();
+        free(book);
         return;
     }
     if (book == NULL) {

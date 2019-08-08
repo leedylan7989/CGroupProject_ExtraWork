@@ -20,13 +20,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
     printLine();
     scanf("%d", &choice);
     FLUSH;
-    while (choice < 0 && choice > 6) {
-        printLine();
-        printf("Please select the valid options. [1-6]\n");
-        printLine();
-        scanf("%d", &choice);
-        FLUSH;
-    }
+    choice = validateOption(choice, 0, 6);
 
     Node* node = NULL;
     if (choice == 1) {
@@ -46,7 +40,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printNode(node);
         } else {
             printLine();
-            printf("\nSEARCH FAILED. ID NOT FOUND.\n");
+            printf("SEARCH FAILED. ID NOT FOUND.\n");
             printLine();
         }
     } else if (choice >= 2 && choice < 7) {
@@ -69,20 +63,18 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printList(node);
         } else {
             printLine();
-            printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
+            printf("SEARCH FAILED. BOOK NOT FOUND.\n");
             printLine();
         }
     } else if (choice == 0){
-        Manga manga;
-        manga.title = "search is canceled from searchManga";
-        Node* exit;
-        exit->manga = manga;
+        Node* exit = (Node*)malloc(sizeof(Node));
+        exit->search = 0;
         return exit;
     }
     Node* head = node;
     if (node != NULL && choice != 1 && retrieve){
         printLine();
-        printf("\nSELECT ONE BOOK AND TYPE THE ID.\n");
+        printf("SELECT ONE BOOK AND TYPE THE ID.\n");
         printLine();
         int id;
         FLUSH;

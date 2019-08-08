@@ -18,6 +18,7 @@ void add(Node** table, Node*** list, Manga manga) {
     temp->nextList = NULL;
     temp->nextUsed = NULL;
     temp->nextAuthor = NULL;
+    temp->search = 1;
     if (table[key] == NULL) {
         table[key] = temp;
     } else {

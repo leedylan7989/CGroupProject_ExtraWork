@@ -77,18 +77,31 @@ int main() {
                 printLine();
                 printf("Confirmed\n");
                 printLine();
+                int i = 1;
                 switch (choice) {
                     case 1:
                         //Add
-                        addManga(table, dictionaryList);
+                        while (i) {
+                            addManga(table, dictionaryList);
+                            i = optionScreen(choice);
+                            i = validateOption(i, 0, 1);
+                        }
                         break;
                     case 2:
                         //Edit
-                        editManga(table, dictionaryList);
+                        while(i){
+                            editManga(table, dictionaryList);
+                            i = optionScreen(choice);
+                            i = validateOption(i, 0, 1);
+                        }
                         break;
                     case 3:
                         //Delete
-                        deleteManga(table, dictionaryList);
+                        while (i) {
+                            deleteManga(table, dictionaryList);
+                            i = optionScreen(choice);
+                            i = validateOption(i, 0, 1);
+                        }
                         break;
                 }
             } else {
@@ -146,15 +159,7 @@ int mainScreen() {
     printf("Type an option: ");
     FLUSH;
     scanf("%d", &a);
-    while (a < 0 || a > 6) {
-        printf("\n");
-        printLine();
-        printf("Invalid Options. Please select a correct option.\n");
-        printLine();
-        FLUSH;
-        printf("Type an option: ");
-        scanf("%d", &a);
-    }
+    a = validateOption(a, 0, 6);
 
     return a;
 }

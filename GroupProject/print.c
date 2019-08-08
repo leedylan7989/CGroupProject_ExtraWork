@@ -15,7 +15,7 @@ void printAll(Node** table) {
 
 void printNode(Node* node) {
     printLine();
-    printf("\nID: %d\nTitle: %s\nAuthor: %s\nGenre: %s\nPublisher: %s\n"
+    printf("ID: %d\nTitle: %s\nAuthor: %s\nGenre: %s\nPublisher: %s\n"
             "Price: %.2lf\n", node->manga.id, node->manga.title,
             node->manga.author, node->manga.genre, node->manga.publisher,
             node->manga.price);

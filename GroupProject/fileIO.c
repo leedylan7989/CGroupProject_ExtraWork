@@ -74,6 +74,10 @@ void readFile(Node** table) {
 
             // get  Price
             new.price = (atof(split));
+            
+            if(new.used){
+                
+            }
             FLUSH;
 
 

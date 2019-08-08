@@ -80,3 +80,35 @@ void clearList(Node* head){
         head->nextList = NULL;
     }
 }
+
+int validateOption(int choice, int startRange, int endRange){
+    while (choice < startRange || choice > endRange) {
+        printLine();
+        printf("Please select the valid options. [%d-%d]\n", startRange,
+                endRange);
+        printLine();
+        FLUSH;
+        printf("Type an option: ");
+        scanf("%d", &choice);
+    }
+    FLUSH;
+    return choice;
+}
+
+int optionScreen(int a) {
+    int i;
+    printLine();
+    if (a == 1)
+        printf("Do you want to add another book?\n");
+    if (a == 2)
+        printf("Do you want to edit another book?\n");
+    if (a == 3)
+        printf("Do you want to delete another book?\n");
+    printf("0 - No\n");
+    printf("1 - Yes\n");
+    printLine();
+    scanf("%d", &i);
+    i = validateOption(i, 0, 1);
+    FLUSH;
+    return i;
+}
