@@ -115,7 +115,7 @@ int main() {
     generateTree(table, &root, -1, 39, 0);
     generateTree(table, &root, 1, 40, SIZE);
 
-    //writeFile(root);
+    writeFile(root);
 
 
     printLine();
@@ -129,6 +129,10 @@ int main() {
 
 }
 
+/*
+ * This function prompts a main screen and wait for a user input
+ * as well as validating the user input
+ */
 int mainScreen() {
     int a;
     printf("=============================================================\n");

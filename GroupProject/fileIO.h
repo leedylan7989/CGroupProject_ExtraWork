@@ -18,7 +18,11 @@
 //If failed, return null
 void readFile(Node**);
 
-void writeFile();
+void writeFile(TreeNode*);
+
+void writeFileRecursive(FILE*,TreeNode*);
+
+
 
 #endif /* FILEIO_H */
 

@@ -1,12 +1,13 @@
-20|Example Title|Some Dude|Mecha|The Publisher|0|10.25
-21|Example Title|Some Dude|Mecha|The Publisher|0|10.25
-22|BExample Title|Some Dude|Mecha|The Publisher|0|10.25
-23|CExample Title|Some Dude|Mecha|The Publisher|0|10.25
-24|DExample Title|Some Dude|Mecha|The Publisher|0|10.25
-25|EExample Title|Some Dude|Mecha|The Publisher|0|10.25
-26|FExample Title|Some Dude|Mecha|The Publisher|0|10.25
-27|GExample Title|Some Dude|Mecha|The Publisher|0|10.25
-28|HExample Title|Some Dude|Mecha|The Publisher|0|10.25
-29|IExample Title|Some Dude|Mecha|The Publisher|0|10.25
-30|JExample Title|Some Dude|Mecha|The Publisher|0|10.25
-31|kExample Title|Some Dude|Mecha|The Publisher|0|10.25
+10|lol|lol|lol|1|10.00
+20|Example Title|Mecha|The Publisher|0|10.25
+21|Example Title|Mecha|The Publisher|0|10.25
+22|BExample Title|Mecha|The Publisher|0|10.25
+23|CExample Title|Mecha|The Publisher|0|10.25
+24|DExample Title|Mecha|The Publisher|0|10.25
+25|EExample Title|Mecha|The Publisher|0|10.25
+26|FExample Title|Mecha|The Publisher|0|10.25
+27|GExample Title|Mecha|The Publisher|0|10.25
+28|HExample Title|Mecha|The Publisher|0|10.25
+29|IExample Title|Mecha|The Publisher|0|10.25
+30|JExample Title|Mecha|The Publisher|0|10.25
+31|kExample Title|Mecha|The Publisher|0|10.25

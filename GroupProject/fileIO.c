@@ -82,6 +82,24 @@ void readFile(Node** table) {
 
         add(table, NULL, new);
     }
-
-
 }
+
+void writeFileRecursive(FILE *filePointer, TreeNode *current) {
+    if (current != NULL) {
+        writeFileRecursive(filePointer, current->left);
+        fprintf(filePointer, "%d|%s|%s|%s|%d|%.2f\r\n", current->node->manga.id,
+                current->node->manga.title, current->node->manga.genre,
+                current->node->manga.publisher, current->node->manga.used,
+                current->node->manga.price);
+        writeFileRecursive(filePointer, current->right);
+    }
+}
+
+void writeFile(TreeNode* root) {
+    FILE *filePointer;
+    filePointer = fopen("books.txt", "w");
+    fclose(filePointer);
+    filePointer = fopen("books.txt", "a");
+    writeFileRecursive(filePointer, root);
+}
+

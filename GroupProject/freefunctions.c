@@ -73,7 +73,15 @@ void freeTree(TreeNode* node){
     }
 }
 
-
+/*
+ * Frees a dictionary
+ * This function frees a list of dictionary
+ * and any dictionary inside the list.
+ * 
+ * freeTable() frees all nodes used by each dictionary
+ * A dictionary just uses their own next field created inside
+ * each node to link each other. 
+ */
 void freeDictionary(Node*** list){
     for(int i = 0; i < 5; i++){
         free(list[i]);
