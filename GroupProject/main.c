@@ -100,9 +100,9 @@ int main() {
             //Search
             searchManga(table, dictionaryList, 0);
         } else if (choice == 5) {
-            printf("\n==========================================\n");
+            printLine();
             printAll(table);
-            printf("==========================================\n\n");
+            printLine();
         } else if (choice == 6) {
             purchaseManga(table, dictionaryList);
         }

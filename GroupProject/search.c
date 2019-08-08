@@ -15,11 +15,12 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
     printf("1 - Search by ID\n2 - Search by Title\n");
     printf("3 - Search by Author\n4 - Search by Genre\n");
     printf("5 - Search by Publisher\n6 - Search Used/New\n");
+    printf("0 - Exit\n");
     int choice;
     printLine();
     scanf("%d", &choice);
     FLUSH;
-    while (choice < 1 && choice > 6) {
+    while (choice < 0 && choice > 6) {
         printLine();
         printf("Please select the valid options. [1-6]\n");
         printLine();
@@ -71,6 +72,12 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printf("\nSEARCH FAILED. BOOK NOT FOUND.\n");
             printLine();
         }
+    } else if (choice == 0){
+        Manga manga;
+        manga.title = "search is canceled from searchManga";
+        Node* exit;
+        exit->manga = manga;
+        return exit;
     }
     Node* head = node;
     if (node != NULL && choice != 1 && retrieve){

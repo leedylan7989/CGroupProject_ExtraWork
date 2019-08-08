@@ -14,6 +14,12 @@ void editManga(Node** table, Node*** list) {
     printf("Search a Manga to edit\n");
     printLine();
     Node* node = searchManga(table, list, 1);
+    if(!strcmp(node->manga.title,"search is canceled from searchManga")){
+        printLine();
+        printf("EDIT CANCELED\n");
+        printLine();
+        return;
+    }
     int tryagain = 1;
     while(node == NULL && tryagain){
         printLine();
@@ -50,7 +56,7 @@ void editManga(Node** table, Node*** list) {
             
             edit(choice, node);
             printLine();
-            printf("\nCONTINUE EDIT?[y/n] \n");
+            printf("CONTINUE EDIT?[y/n] \n");
             printLine();
             FLUSH;
             c = getchar();
@@ -84,6 +90,13 @@ void deleteManga(Node** table, Node*** list) {
         printLine();
         return;
     }
+    
+    if(!strcmp(node->manga.title,"search is canceled from searchManga")){
+        printLine();
+        printf("DELETE CANCELED\n");
+        printLine();
+        return;
+    }
     printNode(node);
     printLine();
     printf("DELETE: CONFIRMING...[y/n]\n");
@@ -98,11 +111,11 @@ void deleteManga(Node** table, Node*** list) {
         }
         delete(table, node->manga.id);
         printLine();
-        printf("\nDELETE SUCCESSFUL\n");
+        printf("DELETE SUCCESSFUL\n");
         printLine();
     } else {
         printLine();
-        printf("\nDELETE CANCELED\n");
+        printf("DELETE CANCELED\n");
         printLine();
     }
 }
@@ -118,7 +131,7 @@ void addManga(Node** table, Node*** list) {
     Manga new;
     int id;
     printLine();
-    printf("\nType an ID (integer) for new Manga\n");
+    printf("Type an ID (integer) for new Manga\n");
     printLine();
     scanf("%d", &id);
     while (searchByID(table, id) != NULL) {
@@ -181,7 +194,7 @@ void addManga(Node** table, Node*** list) {
     new.price = newPrice;
 
     printLine();
-    printf("\nADD: CONFIRMING...[y/n]\n");
+    printf("ADD: CONFIRMING...[y/n]\n");
     printLine();
     FLUSH;
     char c = getchar();
@@ -189,11 +202,11 @@ void addManga(Node** table, Node*** list) {
     if (c == 'y'){
         add(table, list, new);
         printLine();
-        printf("\nNEW BOOK ADDED!\n");
+        printf("NEW BOOK ADDED!\n");
         printLine();
     } else{
         printLine();
-        printf("\nADD CANCELED\n");
+        printf("ADD CANCELED\n");
         printLine();
     }
 }
@@ -203,6 +216,12 @@ void purchaseManga(Node** table, Node*** dictionaryList) {
     printf("Search a book to purchase\n");
     printLine();
     Node* book = searchManga(table, dictionaryList, 1);
+    if(!strcmp(book->manga.title,"search is canceled from searchManga")){
+        printLine();
+        printf("PURCHASE CANCELED\n");
+        printLine();
+        return;
+    }
     if (book == NULL) {
         printLine();
         printf("PURCHASE FAILED\n");
