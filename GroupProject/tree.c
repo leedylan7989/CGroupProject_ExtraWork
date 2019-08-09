@@ -6,21 +6,34 @@ void generateTree(Node** table, TreeNode** tree, int direction, int start,
         int end){
     if(direction == 1 && end > start){
         if (table[start] != NULL) {
-            searchTableNode(table[start], tree);
+            insertTableList(table[start], tree);
         }
         generateTree(table, tree, direction, start+direction, end);
     } else if (direction == -1 && end <= start) {
         if (table[start] != NULL) {
-            searchTableNode(table[start], tree);
+            insertTableList(table[start], tree);
         }
         generateTree(table, tree, direction, start+direction, end);
     }
 }
 
-void searchTableNode(Node* current, TreeNode** tree){
+/*
+ * Iterate through a list and make them into tree nodes
+ */
+void insertTableList(Node* current, TreeNode** tree){
     if (current != NULL) {
         insertTreeNode(tree, current);
-        searchTableNode(current->next, tree);
+        insertTableList(current->next, tree);
+    }
+}
+
+/*
+ * Iterate through a list and make them into tree nodes
+ */
+void insertList(Node* current, TreeNode** tree){
+    if (current != NULL) {
+        insertTreeNode(tree, current);
+        insertList(current->nextList, tree);
     }
 }
 

@@ -35,7 +35,7 @@ void readFile(Node** table) {
 
 
             //  printf("title %s\n", split);
-            new.title = (char*) malloc((strlen((split) + 1) * sizeof (char)));
+            new.title = (char*) malloc((strlen(split) + 1) * sizeof (char));
             strcpy(new.title, split);
             //printf("\ngo %s does not work\n", new.title);
 
@@ -45,14 +45,14 @@ void readFile(Node** table) {
             // get author
             split = strtok(NULL, delim);
             //split = strtok(singleLine, delim);
-            new.author = (char*) malloc((strlen((split) + 1) * sizeof (char)));
+            new.author = (char*) malloc((strlen(split) + 1) * sizeof (char));
             strcpy(new.author, split);
             FLUSH;
 
             // get genre
             split = strtok(NULL, delim);
 
-            new.genre = (char*) malloc((strlen((split) + 1) * sizeof (char)));
+            new.genre = (char*) malloc((strlen(split) + 1) * sizeof (char));
             strcpy(new.genre, split);
             //printf("publisher %s", new.genre);        
             FLUSH;
@@ -60,7 +60,7 @@ void readFile(Node** table) {
             // get publisher
             split = strtok(NULL, delim);
 
-            new.publisher = (char*) malloc((strlen((split) + 1) * sizeof (char)));
+            new.publisher = (char*) malloc((strlen(split) + 1) * sizeof (char));
             strcpy(new.publisher, split);
 
             FLUSH;

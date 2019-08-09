@@ -93,7 +93,27 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
         }
         
         if (node != NULL) {
-            printList(node);
+            TreeNode* tree = NULL;
+            insertList(node, &tree);
+            
+            printLine();
+            printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
+            printf("1 - Unordered\n");
+            printf("2 - Ascending\n");
+            printf("3 - Descending\n");
+            printLine();
+            FLUSH;
+            int a;
+            scanf("%d", &a);
+            a = validateOption(a, 1, 3);
+            FLUSH;
+            if (a == 1)
+                printList(node);
+            else if(a == 2)
+                printInorder(tree);
+            else if(a == 2)
+                printInorderReverse(tree);
+            freeTree(tree);
         } else {
             printLine();
             printf("SEARCH FAILED. BOOK NOT FOUND.\n");

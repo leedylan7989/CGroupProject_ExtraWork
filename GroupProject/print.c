@@ -1,4 +1,5 @@
 #include "print.h"
+#include "tree.h"
 
 
 
@@ -33,6 +34,23 @@ void printList(Node* head){
         head = head->nextList;
     }
 }
+
+void printInorder(TreeNode* root){
+    if(root != NULL){
+        printInorder(root->left);
+        printNode(root->node);
+        printInorder(root->right);
+    }
+}
+
+void printInorderReverse(TreeNode* root){
+    if(root != NULL){
+        printInorderReverse(root->right);
+        printNode(root->node);
+        printInorderReverse(root->left);
+    }
+}
+
 void printLine(){
     printf("=============================================================\n");
 }

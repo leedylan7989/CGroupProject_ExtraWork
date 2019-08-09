@@ -12,9 +12,10 @@ typedef struct treenode{
 
 void generateTree(Node**, TreeNode**, int, int,
         int);
-void searchTableNode(Node*, TreeNode**);
+void insertTableList(Node*, TreeNode**);
 void insertTreeNode(TreeNode**, Node*);
 TreeNode* searchTreeNode(TreeNode*, TreeNode*);
+void insertList(Node*, TreeNode**);
 
 #endif /* TREE_H */
 
