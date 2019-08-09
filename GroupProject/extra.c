@@ -95,6 +95,22 @@ int validateOption(int choice, int startRange, int endRange){
     return choice;
 }
 
+int validateOptionWithException(int choice, int startRange, int endRange,
+        int exception){
+    while (choice < startRange || choice > endRange ||
+            choice == exception) {
+        printLine();
+        printf("Please select the valid options. [%d-%d] except %d\n", startRange,
+                endRange, exception);
+        printLine();
+        FLUSH;
+        printf("Type an option: ");
+        scanf("%d", &choice);
+    }
+    FLUSH;
+    return choice;
+}
+
 int optionScreen(int a) {
     int i;
     printLine();

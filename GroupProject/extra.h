@@ -11,6 +11,7 @@
 #define FLUSH stdin=freopen(NULL,"r",stdin)
 
 char* getString();
+int validateOptionWithException(int, int, int, int);
 int validateOption(int, int, int);
 int characterToIndex(char);
 int boolToIndex(bool);

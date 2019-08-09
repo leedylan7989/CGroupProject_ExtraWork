@@ -1,4 +1,3 @@
-1|Berserk Volume 1|Kentarou Miura|Horror|Dark Horse|0|19.99
 2|Berserk Volume 2|Kentarou Miura|Horror|Dark Horse|0|19.79
 3|Berserk Volume 10|Kentarou Miura|Horror|Dark Horse|0|18.89
 4|Attack on Titan 1|Hajime Isayama|Action|Bessatsu Shounen Magazine|1|11.87
@@ -37,7 +36,6 @@
 37|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 6|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
 38|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 7|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
 39|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 8|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
-40|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 9|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
 41|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 10|Hirohiko Araki|Action|VIZ Media LLC|0|22.99
 42|Mobile Police Patlabor, Vol. 1|Masami Yuki|Mecha|VIZ Media LLC|1|20.92
 43|Mobile Police Patlabor, Vol. 1|Masami Yuki|Mecha|VIZ Media LLC|1|13.36
@@ -101,3 +99,4 @@
 101|Hunter x Hunter, Vol. 34|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
 102|Hunter x Hunter, Vol. 35|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
 103|Hunter x Hunter, Vol. 36|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+110|title|author|genre|publisher|0|9.00
