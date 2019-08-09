@@ -91,7 +91,6 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
         if (choice >= 2 && choice < 7) {
             char* searchString = getString();
             node = searchDouble(node, list, searchString, choice);
-            node = searchDictionary(list[choice - 2], searchString, choice - 2);
         }
 
         if (node != NULL) {
@@ -343,7 +342,7 @@ Node* searchDictionaryTwice(Node** dictionary, char* searchString,
             }
             current = current->nextTitle;
         } else if (num == 0 && num2 == 2 || num2 == 0 && num == 2) {//Title Genre
-            if (strcmp(current->manga.title, searchString) == 0 &&
+            if (strstr(current->manga.title, searchString) == 0 &&
                     strstr(current->manga.genre, searchString2) == 0 ||
                     strstr(current->manga.title, searchString2) == 0
                     && strstr(current->manga.genre, searchString) == 0) {
