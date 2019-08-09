@@ -47,7 +47,7 @@ void process(Node*** dictionaryList, Node** table){
                 }
             } else {
                 printLine();
-                printf("\nEXCESS DENIED\n");
+                printf("\nACCESS DENIED\n");
                 printLine();
             }
         } else if (choice == 4) {
