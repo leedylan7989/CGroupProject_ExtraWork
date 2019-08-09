@@ -8,7 +8,9 @@
 //A caller will only set select to 1
 //when a caller needs to retreive
 //a selected record.
-
+/*
+ * This function searches for a 
+ */
 Node* searchManga(Node** table, Node*** list, int retrieve) {
     //Search
     printLine();
@@ -147,31 +149,33 @@ Node* searchDictionary(Node** dictionary, char* searchString, int num) {
     }
     
     Node* head = NULL;
-    Node* current = dictionary[index];
-    while (current != NULL) {
-        if (num == 0) {//Title
-            if (strcmp(current->manga.title, searchString) == 0) {
+    for (int i = 0; i < 27; i++) {
+        Node* current = dictionary[i];
+        while (current != NULL) {
+            if (num == 0) {//Title
+                if (strstr(current->manga.title, searchString) != NULL) {
+                    head = buildList(head, current);
+                }
+                current = current->nextTitle;
+            } else if (num == 1) {//Author
+                if (strstr(current->manga.author, searchString) != NULL) {
+                    head = buildList(head, current);
+                }
+                current = current->nextAuthor;
+            } else if (num == 2) { //Genre
+                if (strstr(current->manga.genre, searchString) != NULL) {
+                    head = buildList(head, current);
+                }
+                current = current->nextGenre;
+            } else if (num == 3) {//Publisher
+                if (strstr(current->manga.publisher, searchString) != NULL) {
+                    head = buildList(head, current);
+                }
+                current = current->nextPublisher;
+            } else if (num == 4) {//Used
                 head = buildList(head, current);
+                current = current->nextUsed;
             }
-            current = current->nextTitle;
-        } else if (num == 1) {//Author
-            if (strcmp(current->manga.author, searchString) == 0) {
-                head = buildList(head, current);
-            }
-            current = current->nextAuthor;
-        } else if (num == 2) { //Genre
-            if (strstr(current->manga.genre, searchString) != NULL) {
-                head = buildList(head, current);
-            }
-            current = current->nextGenre;
-        } else if (num == 3) {//Publisher
-            if (strcmp(current->manga.publisher, searchString) == 0) {
-                head = buildList(head, current);
-            }
-            current = current->nextPublisher;
-        } else if (num == 4) {//Used
-            head = buildList(head, current);
-            current = current->nextUsed;
         }
     }
     
