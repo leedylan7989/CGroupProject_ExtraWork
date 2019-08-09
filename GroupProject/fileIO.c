@@ -73,11 +73,9 @@ void readFile(Node** table) {
             FLUSH;
 
             // get  Price
+            split = strtok(NULL, delim);
             new.price = (atof(split));
             
-            if(new.used){
-                
-            }
             FLUSH;
 
 
@@ -91,8 +89,8 @@ void readFile(Node** table) {
 void writeFileRecursive(FILE *filePointer, TreeNode *current) {
     if (current != NULL) {
         writeFileRecursive(filePointer, current->left);
-        fprintf(filePointer, "%d|%s|%s|%s|%d|%.2f\r\n", current->node->manga.id,
-                current->node->manga.title, current->node->manga.genre,
+        fprintf(filePointer, "%d|%s|%s|%s|%s|%d|%.2f\r\n", current->node->manga.id,
+                current->node->manga.title,current->node->manga.author, current->node->manga.genre,
                 current->node->manga.publisher, current->node->manga.used,
                 current->node->manga.price);
         writeFileRecursive(filePointer, current->right);

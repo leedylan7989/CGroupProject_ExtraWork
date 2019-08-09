@@ -1,13 +1,103 @@
-10|lol|1|1|1|10.00
-20|Example Title|0|1|1|10.25
-21|Example Title|0|1|1|10.25
-22|BExample Title|0|1|1|10.25
-23|CExample Title|0|1|1|10.25
-24|DExample Title|0|1|1|10.25
-25|EExample Title|0|1|1|10.25
-26|FExample Title|0|1|1|10.25
-27|GExample Title|0|1|1|10.25
-28|HExample Title|0|1|1|10.25
-29|IExample Title|0|1|1|10.25
-30|JExample Title|0|1|1|10.25
-31|kExample Title|0|1|1|10.25
+1|Berserk Volume 1|Kentarou Miura|Horror|Dark Horse|0|19.99
+2|Berserk Volume 2|Kentarou Miura|Horror|Dark Horse|0|19.79
+3|Berserk Volume 10|Kentarou Miura|Horror|Dark Horse|0|18.89
+4|Attack on Titan 1|Hajime Isayama|Action|Bessatsu Shounen Magazine|1|11.87
+5|Attack on Titan 2|Hajime Isayama|Action|Bessatsu Shounen Magazine|1|10.89
+6|Monster, Vol. 1: The Perfect Edition|Naoki Urasawa|Mystery|VIZ Media LLC; Translation edition|0|22.99
+7|Fullmetal Alchemist Box Set|Hiromu Arakawa|Action|VIZ Media LLC|0|219.99
+8|Fullmetal Alchemist: Fullmetal Edition, Vol. 1|Hiromu Arakawa|Action|VIZ Media LLC|0|26.33
+9|Fullmetal Alchemist (3-in-1 Edition), Vol. 1: Includes vols. 1, 2 & 3|Hiromu Arakawa|Action|VIZ Media LLC|1|19.99
+10|The Manga Guide to Microprocessors|Michio Shibuya|Educational|No Starch Press|0|33.95
+11|The Manga Guide to Databases|Michio Shibuya|Educational|No Starch Press|1|19.75
+12|The Manga Guide to Statistics|Shin Takahash|Educatonal|No Starch Press|1|19.95
+13|The Manga Guide to Physics|Hideo Nitta|Educational|No Starch Press|1|24.70
+14|The Manga Guide to Linear Algebra|Shin Takahash|Educational|No Starch Press|1|25.69
+15|The Manga Guide to Calculus|Hiroyuki Kojima|Educational|No Starch Press|1|24.95
+16|The Manga Guide to Electricity|Kazuhiro Fujitaki|Educational|No Starch Press|0|19.75
+17|The Manga Guide to Biochemistry|Masaharu Takemura, Kikuyaro, Office Sawa|Educational|No Starch Press|0|25.69
+18|The Manga Guide to Molecular Biology|Masaharu Takemura|Education|No Starch Press|1|24.95
+19|The Manga Guide to Physiology|Etsuro Tanaka|Education|No Starch Press|0|22.95
+20|The Manga Guide to Relativity|Hideo Nitta|Education|No Starch Press|1|19.95
+21|Berserk Volume 3|Kentarou Miura|Horror|Dark Horse|1|19.99
+22|Berserk Deluxe Volume 1|Kentarou Miura|Horror|Dark Horse|1|65.99
+23|Berserk Deluxe Volume 2|Kentarou Miura|Horror|Dark Horse|1|65.99
+24|Berserk Deluxe Volume 3|Kentarou Miura|Horror|Dark Horse|1|65.99
+25|JoJo's Bizarre Adventure: Part 1--Phantom Blood, Vol. 1|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+26|JoJo's Bizarre Adventure: Part 1--Phantom Blood, Vol. 2|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+27|JoJo's Bizarre Adventure: Part 1--Phantom Blood, Vol. 3|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+28|JoJo's Bizarre Adventure: Part 2--Battle Tendency, Vol. 1|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+29|JoJo's Bizarre Adventure: Part 2--Battle Tendency, Vol. 2|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+30|JoJo's Bizarre Adventure: Part 2--Battle Tendency, Vol. 3|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+31|JoJo's Bizarre Adventure: Part 2--Battle Tendency, Vol. 4|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+32|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 1|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+33|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 2|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+34|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 3|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+35|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 4|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+36|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 5|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+37|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 6|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+38|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 7|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+39|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 8|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+40|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 9|Hirohiko Araki|Action|VIZ Media LLC|0|26.99
+41|JoJo's Bizarre Adventure: Part 3--Stardust Crusaders, Vol. 10|Hirohiko Araki|Action|VIZ Media LLC|0|22.99
+42|Mobile Police Patlabor, Vol. 1|Masami Yuki|Mecha|VIZ Media LLC|1|20.92
+43|Mobile Police Patlabor, Vol. 1|Masami Yuki|Mecha|VIZ Media LLC|1|13.36
+44|Neon Genesis Evangelion 3-in-1 Edition, Vol. 1: Includes vols. 1, 2 & 3|Yoshiyuki Sadamoto|Mecha|VIZ Media LLC|0|26.99
+45|Neon Genesis Evangelion 3-in-1 Edition, Vol. 2: Includes vols. 4, 5 & 6|Yoshiyuki Sadamoto|Mecha|VIZ Media LLC|0|26.99
+46|Neon Genesis Evangelion 3-in-1 Edition, Vol. 3: Includes vols. 7, 8 & 9|Yoshiyuki Sadamoto|Mecha|VIZ Media LLC|0|26.99
+47|Neon Genesis Evangelion 3-in-1 Edition, Vol. 4: Includes vols. 10, 11 & 12|Yoshiyuki Sadamoto|Mecha|VIZ Media LLC|0|26.99
+48|Pluto: Urasawa x Tezuka, Vol. 1|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+49|Pluto: Urasawa x Tezuka, Vol. 2|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+50|Pluto: Urasawa x Tezuka, Vol. 3|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+51|Pluto: Urasawa x Tezuka, Vol. 4|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+52|Pluto: Urasawa x Tezuka, Vol. 5|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+53|Pluto: Urasawa x Tezuka, Vol. 6|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+54|Pluto: Urasawa x Tezuka, Vol. 7|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+55|Pluto: Urasawa x Tezuka, Vol. 8|Naoki Urasawa|Mystery|VIZ Media LLC|0|17.99
+56|20th Century Boys: The Perfect Edition, Vol. 1|Naoki Urasawa|Mystery|VIZ Media LLC|0|26.99
+57|20th Century Boys: The Perfect Edition, Vol. 2|Naoki Urasawa|Mystery|VIZ Media LLC|0|26.99
+58|20th Century Boys: The Perfect Edition, Vol. 3|Naoki Urasawa|Mystery|VIZ Media LLC|0|26.99
+59|20th Century Boys: The Perfect Edition, Vol. 4|Naoki Urasawa|Mystery|VIZ Media LLC|0|26.99
+60|20th Century Boys: The Perfect Edition, Vol. 5|Naoki Urasawa|Mystery|VIZ Media LLC|0|26.99
+61|Akira 35th Anniversary Box Set|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|264.99
+62|Akira Volume 1|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|29.99
+63|Akira Volume 2|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|28.99
+64|Akira Volume 3|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|28.99
+65|Akira Volume 4|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|29.44
+66|Akira Volume 5|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|32.66
+67|Akira Volume 6|Katsuhiro Otomo|Cyberpunk|Kodansha Comics|0|33.66
+68|Hunter x Hunter, Vol. 1|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.10
+69|Hunter x Hunter, Vol. 2|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.46
+70|Hunter x Hunter, Vol. 3|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.44
+71|Hunter x Hunter, Vol. 4|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+72|Hunter x Hunter, Vol. 5|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.85
+73|Hunter x Hunter, Vol. 6|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.51
+74|Hunter x Hunter, Vol. 7|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+75|Hunter x Hunter, Vol. 8|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+76|Hunter x Hunter, Vol. 9|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+77|Hunter x Hunter, Vol. 10|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.57
+78|Hunter x Hunter, Vol. 11|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+79|Hunter x Hunter, Vol. 12|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+80|Hunter x Hunter, Vol. 13|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.44
+81|Hunter x Hunter, Vol. 14|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+82|Hunter x Hunter, Vol. 15|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+83|Hunter x Hunter, Vol. 16|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+84|Hunter x Hunter, Vol. 17|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.53
+85|Hunter x Hunter, Vol. 18|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+86|Hunter x Hunter, Vol. 19|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.42
+87|Hunter x Hunter, Vol. 20|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+88|Hunter x Hunter, Vol. 21|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+89|Hunter x Hunter, Vol. 22|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+90|Hunter x Hunter, Vol. 23|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+91|Hunter x Hunter, Vol. 24|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.66
+92|Hunter x Hunter, Vol. 25|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+93|Hunter x Hunter, Vol. 26|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+94|Hunter x Hunter, Vol. 27|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+95|Hunter x Hunter, Vol. 28|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+96|Hunter x Hunter, Vol. 29|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+97|Hunter x Hunter, Vol. 30|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.86
+98|Hunter x Hunter, Vol. 31|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.10
+99|Hunter x Hunter, Vol. 32|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+100|Hunter x Hunter, Vol. 33|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+101|Hunter x Hunter, Vol. 34|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+102|Hunter x Hunter, Vol. 35|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
+103|Hunter x Hunter, Vol. 36|Yoshihiro Togashi|Action|VIZ Media LLC|0|12.99
