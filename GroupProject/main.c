@@ -67,8 +67,10 @@ int main() {
 
     TreeNode* root = NULL;
 
-    generateTree(table, &root, -1, 39, 0);
-    generateTree(table, &root, 1, 40, SIZE);
+    //-1 is going higher index to lower index
+    //1 is going lower index to higher index
+    generateTree(table, &root, -1, SIZE/2, 0);
+    generateTree(table, &root, 1, (SIZE/2)+1, SIZE);
 
     writeFile(root);
 
