@@ -111,7 +111,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
                 printList(node);
             else if(a == 2)
                 printInorder(tree);
-            else if(a == 2)
+            else if(a == 3)
                 printInorderReverse(tree);
             freeTree(tree);
         } else {
