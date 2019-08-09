@@ -217,7 +217,7 @@ Node* searchByID(Node** table, int id) {
 
 Node* searchByIDRange(Node** table, int start, int end) {
     Node* head = NULL;
-    for (int i = start; i < end - start + 1; i++) {
+    for (int i = start; i < end + 1; i++) {
         int key = divisionHash(i);
         Node* current = table[key];
         while (current != NULL) {
