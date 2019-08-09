@@ -15,12 +15,13 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
     printf("1 - Search by ID\n2 - Search by Title\n");
     printf("3 - Search by Author\n4 - Search by Genre\n");
     printf("5 - Search by Publisher\n6 - Search Used/New\n");
+    printf("7 - Search by Price Range\n8 - Search by ID Range\n");
     printf("0 - Exit\n");
     int choice;
     printLine();
     scanf("%d", &choice);
     FLUSH;
-    choice = validateOption(choice, 0, 6);
+    choice = validateOption(choice, 0, 8);
 
     Node* node = NULL;
     if (choice == 1) {
@@ -43,7 +44,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printf("SEARCH FAILED. ID NOT FOUND.\n");
             printLine();
         }
-    } else if (choice >= 2 && choice < 7) {
+    } else if (choice >= 2 && choice < 9) {
         printLine();
         if(choice == 2)
             printf("Type the title you want to search.\n");
@@ -55,10 +56,40 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printf("Type the publisher you want to search.\n");
         else if (choice == 6)
             printf("Type 'used' for used books and 'new' for new books\n");
-        printLine();
-        char* searchString = getString();
+        else if (choice == 7) {
+            double start, end;
+            printLine();
+            printf("Please Type a price range\n");
+            printLine();
+            printf("Starting Price: $");
+            scanf("%lf", &start);
+            FLUSH;
+            printf("End Price: $");
+            scanf("%lf", &end);
+            FLUSH;
 
-        node = searchDictionary(list[choice-2], searchString, choice-2);
+            node = searchByPriceRange(table, start, end);
+        }else if (choice == 8) {
+            int start, end;
+            printLine();
+            printf("Please Type an ID range\n");
+            printLine();
+            printf("Starting ID: ");
+            scanf("%d", &start);
+            FLUSH;
+            printf("End ID: ");
+            scanf("%d", &end);
+            FLUSH;
+
+            node = searchByIDRange(table, start, end);
+        }
+        printLine();
+
+        if (choice >= 2 && choice < 7) {
+            char* searchString = getString();
+            node = searchDictionary(list[choice - 2], searchString, choice - 2);
+        }
+        
         if (node != NULL) {
             printList(node);
         } else {
@@ -71,6 +102,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
         exit->search = 0;
         return exit;
     }
+    
     Node* head = node;
     if (node != NULL && choice != 1 && retrieve){
         printLine();
@@ -157,4 +189,34 @@ Node* searchByID(Node** table, int id) {
         }
     }
     return current;
+}
+
+Node* searchByIDRange(Node** table, int start, int end) {
+    Node* head = NULL;
+    for (int i = start; i < end - start + 1; i++) {
+        int key = divisionHash(i);
+        Node* current = table[key];
+        while (current != NULL) {
+            if (current->manga.id == i) {
+                head = buildList(head, current);
+            }
+            current = current->next;
+        }
+    }
+    return head;
+}
+
+Node* searchByPriceRange(Node** table, double start, double end) {
+    Node* head = NULL;
+    for (int i = 0; i < SIZE; i++) {
+        Node* current = table[i];
+        while (current != NULL) {
+            if (current->manga.price >= start 
+                    && current->manga.price <= end) {
+                head = buildList(head, current);
+            }
+            current = current->next;
+        }
+    }
+    return head;
 }

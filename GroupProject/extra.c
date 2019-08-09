@@ -112,3 +112,22 @@ int optionScreen(int a) {
     FLUSH;
     return i;
 }
+
+
+int mainScreen() {
+    int a;
+    printf("=============================================================\n");
+    printf("=============== Welcome to Manga Shop! ======================\n");
+    printf("======================= 0 - Exit  ===========================\n");
+    printf("================== ADMINISTRATOR OPTIONS ====================\n");
+    printf("=========== 1 - Add === 2 - Edit === 3 - Delete =============\n");
+    printf("======================== USER OPTIONS =======================\n");
+    printf("========= 4 - Search === 5 - Show All === 6 - Purchase ======\n");
+    printf("=============================================================\n");
+    printf("Type an option: ");
+    FLUSH;
+    scanf("%d", &a);
+    a = validateOption(a, 0, 6);
+
+    return a;
+}

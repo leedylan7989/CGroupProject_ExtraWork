@@ -16,6 +16,9 @@ int characterToIndex(char);
 int boolToIndex(bool);
 Node* buildList(Node*, Node*);
 void clearList(Node*);
+
+//Screens
+int mainScreen();
 int optionScreen();
 
 //Function for other functions

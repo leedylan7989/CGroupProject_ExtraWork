@@ -44,6 +44,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/hashtable.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/print.o \
+	${OBJECTDIR}/process.o \
 	${OBJECTDIR}/search.o \
 	${OBJECTDIR}/tree.o
 
@@ -116,6 +117,11 @@ ${OBJECTDIR}/print.o: print.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/print.o print.c
+
+${OBJECTDIR}/process.o: process.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/process.o process.c
 
 ${OBJECTDIR}/search.o: search.c
 	${MKDIR} -p ${OBJECTDIR}

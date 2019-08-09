@@ -70,6 +70,9 @@ void addDictionary(Node* node, Node** dictionary, int num) {
     }
 }
 
+/*
+ * Searches a node that can be a parent node from a linked list
+ */
 Node* searchParentDictionaryNode(Node* node, int num) {
     if (node == NULL) {
         return node;

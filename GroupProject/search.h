@@ -18,6 +18,8 @@
 Node* searchManga(Node**, Node***, int);
 Node* searchByID(Node**, int);
 Node* searchDictionary(Node**, char*, int);
+Node* searchByPriceRange(Node**,double, double);
+Node* searchByIDRange(Node**, int, int);
 
 #endif /* SEARCH_H */
 
