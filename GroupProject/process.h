@@ -13,6 +13,7 @@
 #include "bookfunctions.h"
 #include "search.h"
 #include "dictionary.h"
+#include "tree.h"
 
 #define FLUSH stdin=freopen(NULL,"r",stdin)
 

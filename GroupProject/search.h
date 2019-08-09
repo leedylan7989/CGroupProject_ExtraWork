@@ -20,6 +20,8 @@ Node* searchByID(Node**, int);
 Node* searchDictionary(Node**, char*, int);
 Node* searchByPriceRange(Node**,double, double);
 Node* searchByIDRange(Node**, int, int);
+Node* searchDouble(Node*, Node***, char*, int);
+Node* searchDictionaryTwice(Node**, char*,char*, int, int);
 
 #endif /* SEARCH_H */
 

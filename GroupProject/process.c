@@ -1,7 +1,6 @@
 #include "process.h"
 
-
-void process(Node*** dictionaryList, Node** table){
+void process(Node*** dictionaryList, Node** table) {
     int choice;
     while ((choice = mainScreen())) {
         if (choice == 1 || choice == 2 || choice == 3) {
@@ -30,7 +29,7 @@ void process(Node*** dictionaryList, Node** table){
                         break;
                     case 2:
                         //Edit
-                        while(i){
+                        while (i) {
                             editManga(table, dictionaryList);
                             i = optionScreen(choice);
                             i = validateOption(i, 0, 1);
@@ -55,8 +54,30 @@ void process(Node*** dictionaryList, Node** table){
             searchManga(table, dictionaryList, 0);
         } else if (choice == 5) {
             printLine();
-            printAll(table);
+            printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
+            printf("1 - Unordered\n");
+            printf("2 - Ascending\n");
+            printf("3 - Descending\n");
             printLine();
+            FLUSH;
+            int a;
+            scanf("%d", &a);
+            a = validateOption(a, 1, 3);
+            FLUSH;
+            
+            TreeNode* tree = NULL;
+            if(a == 2 || a == 3){
+                generateTree(table, &tree, 1, 0, SIZE);
+            }
+            if (a == 1) {
+                printLine();
+                printAll(table);
+                printLine();
+            } else if (a == 2)
+                printInorder(tree);
+            else if (a == 3)
+                printInorderReverse(tree);
+            freeTree(tree);
         } else if (choice == 6) {
             purchaseManga(table, dictionaryList);
         }
