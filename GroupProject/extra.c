@@ -60,25 +60,48 @@ int boolToIndex(bool c) {
     return i;
 }
 
-Node* buildList(Node* head, Node* node){
-    if(head == NULL){
+int optionToSize(int num){
+    if (num == 4) {
+        return 2;
+    } else {
+        return 27;
+    }
+}
+
+Node* buildList(Node* head, Node* node, int doubleSearch) {
+    if (head == NULL) {
         return node;
     }
     Node* current = head;
-    while(current->nextList != NULL){
-        current = current->nextList;
+    if (!doubleSearch) {
+        while (current->nextList != NULL) {
+            current = current->nextList;
+        }
+        current->nextList = node;
+    } else {
+        while (current->nextSecondList != NULL) {
+            current = current->nextSecondList;
+        }
+        current->nextSecondList = node;
     }
-    current->nextList = node;
     return head;
-    
 }
 
-
-void clearList(Node* head){
-    if(head != NULL){
+void clearList(Node* head) {
+    if (head != NULL) {
         clearList(head->nextList);
         head->nextList = NULL;
     }
+    
+}
+
+void switchList(Node* head) {
+    if (head != NULL) {
+        switchList(head->nextSecondList);
+        head->nextList = head->nextSecondList;
+        head->nextSecondList = NULL;
+    }
+    
 }
 
 int validateOption(int choice, int startRange, int endRange){

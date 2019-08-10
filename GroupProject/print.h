@@ -13,6 +13,7 @@ void printLine();
 void printList(Node*);
 void printInorder(TreeNode*);
 void printInorderReverse(TreeNode*);
+void printSecondList(Node*);
 
 #endif /* PRINT_H */
 

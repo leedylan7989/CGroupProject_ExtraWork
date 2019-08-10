@@ -90,36 +90,23 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
 
         if (choice >= 2 && choice < 7) {
             char* searchString = getString();
+            if (choice == 6) {
+                while (!strcmp(searchString, "used") &&
+                        !strcmp(searchString, "Used") &&
+                        !strcmp(searchString, "new") &&
+                        !strcmp(searchString, "New")) {
+                    printLine();
+                    printf("Please type either 'used' or 'new'.\n");
+                    printLine();
+                    FLUSH;
+                    searchString = getString();
+                }
+                FLUSH;
+            }
             node = searchDouble(node, list, searchString, choice);
         }
 
-        if (node != NULL) {
-            TreeNode* tree = NULL;
-            insertList(node, &tree);
 
-            printLine();
-            printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
-            printf("1 - Unordered\n");
-            printf("2 - Ascending\n");
-            printf("3 - Descending\n");
-            printLine();
-            FLUSH;
-            int a;
-            scanf("%d", &a);
-            a = validateOption(a, 1, 3);
-            FLUSH;
-            if (a == 1)
-                printList(node);
-            else if (a == 2)
-                printInorder(tree);
-            else if (a == 3)
-                printInorderReverse(tree);
-            freeTree(tree);
-        } else {
-            printLine();
-            printf("SEARCH FAILED. BOOK NOT FOUND.\n");
-            printLine();
-        }
     } else if (choice == 0) {
         Node* exit = (Node*) malloc(sizeof (Node));
         exit->search = 0;
@@ -151,50 +138,35 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
 }
 
 Node* searchDictionary(Node** dictionary, char* searchString, int num) {
-    int index;
-    if (num == 4) {
-        if (strcmp("used", searchString) == 0 ||
-                strcmp("Used", searchString) == 0) {
-            index = 1;
-        } else if (strcmp("new", searchString) == 0 ||
-                strcmp("New", searchString) == 0) {
-            index = 0;
-        } else {
-            printLine();
-            printf("PLEASE TYPE EITHER 'used' OR 'new'. RETURNING TO THE MENU\n");
-            printLine();
-            return NULL;
-        }
-    } else {
-        index = characterToIndex(searchString[0]);
-    }
+    int size;
+    size = optionToSize(num);
 
     Node* head = NULL;
-    for (int i = 0; i < 27; i++) {
+    for (int i = 0; i < size; i++) {
         Node* current = dictionary[i];
         while (current != NULL) {
             if (num == 0) {//Title
                 if (strstr(current->manga.title, searchString) != NULL) {
-                    head = buildList(head, current);
+                    head = buildList(head, current, 0);
                 }
                 current = current->nextTitle;
             } else if (num == 1) {//Author
                 if (strstr(current->manga.author, searchString) != NULL) {
-                    head = buildList(head, current);
+                    head = buildList(head, current, 0);
                 }
                 current = current->nextAuthor;
             } else if (num == 2) { //Genre
                 if (strstr(current->manga.genre, searchString) != NULL) {
-                    head = buildList(head, current);
+                    head = buildList(head, current, 0);
                 }
                 current = current->nextGenre;
             } else if (num == 3) {//Publisher
                 if (strstr(current->manga.publisher, searchString) != NULL) {
-                    head = buildList(head, current);
+                    head = buildList(head, current, 0);
                 }
                 current = current->nextPublisher;
             } else if (num == 4) {//Used
-                head = buildList(head, current);
+                head = buildList(head, current, 0);
                 current = current->nextUsed;
             }
         }
@@ -223,7 +195,7 @@ Node* searchByIDRange(Node** table, int start, int end) {
         Node* current = table[key];
         while (current != NULL) {
             if (current->manga.id == i) {
-                head = buildList(head, current);
+                head = buildList(head, current, 0);
             }
             current = current->next;
         }
@@ -238,7 +210,7 @@ Node* searchByPriceRange(Node** table, double start, double end) {
         while (current != NULL) {
             if (current->manga.price >= start
                     && current->manga.price <= end) {
-                head = buildList(head, current);
+                head = buildList(head, current, 0);
             }
             current = current->next;
         }
@@ -274,13 +246,13 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
         printLine();
         scanf("%d", &choice2);
         printLine();
-        
+
         FLUSH;
-        if(choice == choice2){
+        if (choice == choice2) {
             choice2 = validateOptionWithException(choice2, 2, 6, choice);
         }
         FLUSH;
-        
+
         printLine();
         if (choice2 == 2)
             printf("Type the title you want to search.\n");
@@ -297,136 +269,164 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
         searchString2 = getString();
     }
 
+
+    Node* result = NULL;
     if (choice3 == 1) {
-
-        node = searchDictionaryTwice(list[choice - 2], searchString,
+        node = searchDictionary(list[choice - 2], searchString, choice - 2);
+        result = searchDictionaryTwice(node, searchString,
                 searchString2, choice - 2, choice2 - 2);
-    } else node = searchDictionary(list[choice - 2],
-            searchString, choice - 2);
+    } else {
+        node = searchDictionary(list[choice - 2],
+                searchString, choice - 2);
+    }
 
+    if ((!choice3 && node != NULL) || (choice3 && result != NULL)) {
+        TreeNode* tree = NULL;
+        if (!choice3)
+            insertList(node, &tree);
+        else
+            insertList(result, &tree);
+
+        printLine();
+        printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
+        printf("1 - Unordered\n");
+        printf("2 - Ascending\n");
+        printf("3 - Descending\n");
+        printLine();
+        FLUSH;
+        int a;
+        scanf("%d", &a);
+        a = validateOption(a, 1, 3);
+        FLUSH;
+        if (a == 1) {
+            if (!choice3)
+                printList(node);
+            else {
+                printSecondList(result);
+                clearList(node);
+                switchList(result);
+                node = result;
+            }
+        } else if (a == 2)
+            printInorder(tree);
+        else if (a == 3)
+            printInorderReverse(tree);
+        freeTree(tree);
+    } else {
+        printLine();
+        printf("SEARCH FAILED. BOOK NOT FOUND.\n");
+        printLine();
+    }
     return node;
 
 }
 
 /*
  * Double search
+ * Takes the first result linked list as a parameter
  * I separated this part from searchDictionary which is single field search.
  * The two functions have different authors.
  * The functions might have duplicate parts.
  * 
  */
-Node* searchDictionaryTwice(Node** dictionary, char* searchString,
+Node* searchDictionaryTwice(Node* firstResultList, char* searchString,
         char* searchString2, int num, int num2) {
-    int index;
-    if (num == 4) {
-        if (strcmp("used", searchString) == 0 ||
-                strcmp("Used", searchString) == 0) {
-            index = 1;
-        } else if (strcmp("new", searchString) == 0 ||
-                strcmp("New", searchString) == 0) {
-            index = 0;
-        } else {
-            printLine();
-            printf("PLEASE TYPE EITHER 'used' OR 'new'. RETURNING TO THE MENU\n");
-            printLine();
-            return NULL;
-        }
-    } else {
-        index = characterToIndex(searchString[0]);
-    }
 
     Node* head = NULL;
-    Node* current = dictionary[index];
 
+    Node* current = firstResultList;
     while (current != NULL) {
         if (num == 0 && num2 == 1) {//Title Author
             if (strstr(current->manga.title, searchString) != NULL
                     && strstr(current->manga.author, searchString2) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
-        } else if(num2 == 0 && num == 1){//Author Title
-            if(strstr(current->manga.title, searchString2) != NULL
-                    && strstr(current->manga.author, searchString) != NULL){
-                head = buildList(head, current);
+            current = current->nextList;
+        } else if (num2 == 0 && num == 1) {//Author Title
+            if (strstr(current->manga.title, searchString2) != NULL
+                    && strstr(current->manga.author, searchString) != NULL) {
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
+            current = current->nextList;
         } else if (num == 0 && num2 == 2) {//Title Genre
             if (strstr(current->manga.title, searchString) != NULL &&
                     strstr(current->manga.genre, searchString2) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
-        }else if(num2 == 0 && num == 2){//Genre Title
-            if(strstr(current->manga.title, searchString2) != NULL
-                    && strstr(current->manga.genre, searchString) != NULL){
-                head = buildList(head, current);
+            current = current->nextList;
+        } else if (num2 == 0 && num == 2) {//Genre Title
+            if (strstr(current->manga.title, searchString2) != NULL
+                    && strstr(current->manga.genre, searchString) != NULL) {
+                head = buildList(head, current, 1);
             }
-        }else if (num == 0 && num2 == 3) {//Title Publisher
+            current = current->nextList;
+        } else if (num == 0 && num2 == 3) {//Title Publisher
             if (strstr(current->manga.title, searchString) != NULL &&
                     strstr(current->manga.publisher, searchString2) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
-        } else if(num2 == 0 && num == 3){//Publisher Title
+            current = current->nextList;
+        } else if (num2 == 0 && num == 3) {//Publisher Title
             if (strstr(current->manga.title, searchString2) != NULL
                     && strstr(current->manga.publisher, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
+            current = current->nextList;
         } else if (num == 1 && num2 == 0 || num == 0 && num2 == 1) {//Author Title 
             if (strstr(current->manga.author, searchString) != NULL &&
                     strstr(current->manga.title, searchString2) != NULL ||
                     strstr(current->manga.author, searchString2) != NULL &&
                     strstr(current->manga.title, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextTitle;
+            current = current->nextList;
         } else if (num == 1 && num2 == 2 || num == 2 && num2 == 1) {//Author Genre 
             if (strstr(current->manga.author, searchString) != NULL &&
                     strstr(current->manga.genre, searchString2) != NULL ||
                     strstr(current->manga.author, searchString2) != NULL &&
                     strstr(current->manga.genre, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextAuthor;
+            current = current->nextList;
         } else if (num == 1 && num2 == 3 || num == 3 && num2 == 1) {//Author Publisher 
             if (strstr(current->manga.author, searchString) != NULL &&
                     strstr(current->manga.publisher, searchString2) != NULL ||
                     strstr(current->manga.author, searchString2) != NULL
                     && strstr(current->manga.publisher, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextPublisher;
+            current = current->nextList;
         } else if (num == 1 && num2 == 2 || num == 2 && num2 == 1) {//Author Used 
             if (strstr(current->manga.author, searchString) != NULL
                     && strstr(current->manga.genre, searchString2) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextAuthor;
+            current = current->nextList;
         } else if (num == 2 && num2 == 3 || num == 3 && num2 == 2) { //Genre Publisher
             if (strstr(current->manga.genre, searchString) != NULL
                     && strstr(current->manga.publisher, searchString2) != NULL ||
                     strstr(current->manga.genre, searchString2) != NULL
                     && strstr(current->manga.publisher, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current, 1);
             }
-            current = current->nextGenre;
-        } else if (num == 2) { //Genre
+            current = current->nextList;
+        } else if (num2 == 2) { //Genre
             if (strstr(current->manga.genre, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current,1);
             }
-            current = current->nextGenre;
-        } else if (num == 3) {//Publisher
+            current = current->nextList;
+        } else if (num2 == 3) {//Publisher
             if (strstr(current->manga.publisher, searchString) != NULL) {
-                head = buildList(head, current);
+                head = buildList(head, current,1);
             }
-            current = current->nextPublisher;
-        } else if (num == 4) {//Used
-            head = buildList(head, current);
-            current = current->nextUsed;
+            current = current->nextList;
+        } else if (num2 == 4) {//Used
+            if (current->manga.used)
+                head = buildList(head, current,1);
+            current = current->nextList;
         }
     }
+
 
     return head;
 }

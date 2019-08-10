@@ -35,6 +35,13 @@ void printList(Node* head){
     }
 }
 
+void printSecondList(Node* head){
+    while(head != NULL){
+        printNode(head);
+        head = head->nextSecondList;
+    }
+}
+
 void printInorder(TreeNode* root){
     if(root != NULL){
         printInorder(root->left);

@@ -32,6 +32,8 @@ typedef struct node {
     struct node* nextUsed;
     //Used for range search
     struct node* nextList;
+    //Used for double search
+    struct node* nextSecondList;
 } Node;
 
 //Hash table functions

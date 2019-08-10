@@ -15,8 +15,10 @@ int validateOptionWithException(int, int, int, int);
 int validateOption(int, int, int);
 int characterToIndex(char);
 int boolToIndex(bool);
-Node* buildList(Node*, Node*);
+int optionToSize(int);
+Node* buildList(Node*, Node*, int);
 void clearList(Node*);
+void switchList(Node*);
 
 //Screens
 int mainScreen();
