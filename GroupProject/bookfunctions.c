@@ -1,6 +1,7 @@
 #include "bookfunctions.h"
 
 /*
+ * Heon Lee
  * Parameter: table - hash table
  * This function contains necessary UIs for edit and
  * calls search function to search for a node.
@@ -69,6 +70,7 @@ void editManga(Node** table, Node*** list) {
 
 
 /*
+ * Heon Lee
  * Parameter: table - hash table
  * This function contains necessary UIs for delete.
  * This function calls search function to search for a node with 
@@ -124,6 +126,7 @@ void deleteManga(Node** table, Node*** list) {
 }
 
 /*
+ * Heon Lee
  * Parameter: table - hash table
  * This function contains necessary UIs for add.
  * This function asks for new book's information to a user.
@@ -214,7 +217,12 @@ void addManga(Node** table, Node*** list) {
         printLine();
     }
 }
-
+/*
+ * Heon Lee
+ * This function is used to purchase a Manga.
+ * If a user purchases a comics, the comics is deleted from the
+ * main hash table and all related data structures.
+ */
 void purchaseManga(Node** table, Node*** dictionaryList) {
     printLine();
     printf("Search a book to purchase\n");

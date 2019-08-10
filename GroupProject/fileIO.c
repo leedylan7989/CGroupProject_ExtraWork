@@ -1,7 +1,13 @@
 #include "fileIO.h"
 
+//All functions in this file is done by Peter Szadurski 
+
 const char delim[2] = "|";
 
+/*
+ * Reads records from books.txt.
+ * Then, populates the main hash table
+ */
 void readFile(Node** table) {
     //  printf("test\n");
 
@@ -86,6 +92,9 @@ void readFile(Node** table) {
     }
 }
 
+/*
+ * Recursive function for writing a node to a file
+ */
 void writeFileRecursive(FILE *filePointer, TreeNode *current) {
     if (current != NULL) {
         writeFileRecursive(filePointer, current->left);
@@ -97,10 +106,15 @@ void writeFileRecursive(FILE *filePointer, TreeNode *current) {
     }
 }
 
+/*
+ * Writing to a file. Calls writeFileRecursive()
+ */
 void writeFile(TreeNode* root) {
     FILE *filePointer;
+    //A file pointer to clear the record in books.txt
     filePointer = fopen("books.txt", "w");
     fclose(filePointer);
+    //A file pointer to append to books.txt
     filePointer = fopen("books.txt", "a");
     writeFileRecursive(filePointer, root);
     fclose(filePointer);

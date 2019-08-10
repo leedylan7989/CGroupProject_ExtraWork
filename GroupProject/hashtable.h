@@ -18,6 +18,8 @@ typedef struct {
 
 typedef struct node {
     Manga manga;
+    //1 - User want to continue a search
+    //0 - User want to cancel a search
     int search;
     struct node* next;
     //Used for title dictionary

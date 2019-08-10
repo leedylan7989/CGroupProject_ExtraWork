@@ -1,5 +1,13 @@
 #include "process.h"
 
+
+/*
+ * Heon Lee
+ * This function is created to reduce the amount of code
+ * in main.c
+ * 
+ * 
+ */
 void process(Node*** dictionaryList, Node** table) {
     int choice;
     while ((choice = mainScreen())) {
@@ -53,6 +61,7 @@ void process(Node*** dictionaryList, Node** table) {
             //Search
             searchManga(table, dictionaryList, 0);
         } else if (choice == 5) {
+            //Show All
             printLine();
             printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
             printf("1 - Unordered\n");
@@ -70,6 +79,7 @@ void process(Node*** dictionaryList, Node** table) {
                 generateTree(table, &tree, 1, 0, SIZE);
             }
             if (a == 1) {
+                //Prints the main hash table
                 printLine();
                 printAll(table);
                 printLine();

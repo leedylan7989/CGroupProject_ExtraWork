@@ -1,6 +1,10 @@
 #include "tree.h"
 
 
+/*
+ * Nikita Kartavyi 
+ * Generates a tree from a given hash table
+ */
 //direction: -1 - Going left, 1 - Going right
 void generateTree(Node** table, TreeNode** tree, int direction, int start,
         int end){
@@ -18,6 +22,7 @@ void generateTree(Node** table, TreeNode** tree, int direction, int start,
 }
 
 /*
+ * Nikita Kartavyi 
  * Iterate through a list and make them into tree nodes
  */
 void insertTableList(Node* current, TreeNode** tree){
@@ -28,6 +33,7 @@ void insertTableList(Node* current, TreeNode** tree){
 }
 
 /*
+ * Nikita Kartavyi 
  * Iterate through a list and make them into tree nodes
  */
 void insertList(Node* current, TreeNode** tree){
@@ -36,7 +42,10 @@ void insertList(Node* current, TreeNode** tree){
         insertList(current->nextList, tree);
     }
 }
-
+/*
+ * Nikita Kartavyi 
+ * Creates a tree node from a table node and insert into the given tree.
+ */
 void insertTreeNode(TreeNode** tree, Node* node){
     if(*tree == NULL){
         *tree = (TreeNode*)malloc(sizeof(TreeNode));
@@ -55,6 +64,11 @@ void insertTreeNode(TreeNode** tree, Node* node){
     }
 }
 
+/*
+ * 
+ * Nikita Kartavyi 
+ * Searches a tree node from a given tree
+ */
 TreeNode* searchTreeNode(TreeNode* root, TreeNode* temp){
         if(temp->node->manga.id > root->node->manga.id){
             if(root->right == NULL){

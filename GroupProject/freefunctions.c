@@ -1,5 +1,8 @@
 #include "freefunctions.h"
 
+//All functions done by Heon Lee
+
+
 //Heon Lee
 //Frees a single Node as well as any allocated field
 //in the node

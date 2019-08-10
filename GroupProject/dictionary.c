@@ -2,8 +2,10 @@
 
 
 /*
+ * Vladyslav Hrusha
  * Parameters: table - hash table, dictionary - dictionary list
  * num - selected dictionary number
+ * This function populates a dictionary from a hash table
  */
 void createDictionary(Node** table, Node*** dictionary, int num) {
     for (int i = 0; i < SIZE; i++) {
@@ -19,6 +21,10 @@ void createDictionary(Node** table, Node*** dictionary, int num) {
  * 2 - genre
  * 3 - publisher
  * 4 - used
+ */
+/*
+ * Vladyslav Hrusha
+ * This function adds a node to a dictionary
  */
 void addDictionary(Node* node, Node** dictionary, int num) {
     //Iterate through each index of hash table
@@ -72,6 +78,7 @@ void addDictionary(Node* node, Node** dictionary, int num) {
 
 /*
  * Searches a node that can be a parent node from a linked list
+ * Vladyslav Hrusha
  */
 Node* searchParentDictionaryNode(Node* node, int num) {
     if (node == NULL) {

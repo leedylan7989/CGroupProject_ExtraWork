@@ -10,10 +10,15 @@
 //a selected record.
 
 /*
- * This function searches for a 
+ * Vladyslav Hrusha
+ * This function searches for a record
+ * 
+ * 
+ * Heon Lee and Nikita Kartavyi also modified this function
  */
 Node* searchManga(Node** table, Node*** list, int retrieve) {
     //Search
+    //Search Menu
     printLine();
     printf("1 - Search by ID\n2 - Search by Title\n");
     printf("3 - Search by Author\n4 - Search by Genre\n");
@@ -24,10 +29,11 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
     printLine();
     scanf("%d", &choice);
     FLUSH;
+    //Validation
     choice = validateOption(choice, 0, 8);
 
     Node* node = NULL;
-    if (choice == 1) {
+    if (choice == 1) { //ID search
         printLine();
         printf("Type the ID you want to search.\n");
         printLine();
@@ -40,6 +46,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             scanf("%d", &id);
         }
         node = searchByID(table, id);
+        //Print the searched node
         if (node != NULL) {
             printNode(node);
         } else {
@@ -47,7 +54,8 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printf("SEARCH FAILED. ID NOT FOUND.\n");
             printLine();
         }
-    } else if (choice >= 2 && choice < 9) {
+    } else if (choice >= 2 && choice < 9) {//Options available for
+        //double search
         printLine();
         if (choice == 2)
             printf("Type the title you want to search.\n");
@@ -59,7 +67,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             printf("Type the publisher you want to search.\n");
         else if (choice == 6)
             printf("Type 'used' for used books and 'new' for new books\n");
-        else if (choice == 7) {
+        else if (choice == 7) {//Price range search
             double start, end;
             printLine();
             printf("Please Type a price range\n");
@@ -72,7 +80,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
             FLUSH;
 
             node = searchByPriceRange(table, start, end);
-        } else if (choice == 8) {
+        } else if (choice == 8) {//ID range search
             int start, end;
             printLine();
             printf("Please Type an ID range\n");
@@ -90,6 +98,7 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
 
         if (choice >= 2 && choice < 7) {
             char* searchString = getString();
+            //Validation for used/new
             if (choice == 6) {
                 while (!strcmp(searchString, "used") &&
                         !strcmp(searchString, "Used") &&
@@ -107,12 +116,14 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
         }
 
 
-    } else if (choice == 0) {
+    } else if (choice == 0) {//Exit
         Node* exit = (Node*) malloc(sizeof (Node));
         exit->search = 0;
         return exit;
     }
-
+    
+    
+    //A user must select one node from a result linked list
     Node* head = node;
     if (node != NULL && choice != 1 && retrieve) {
         printLine();
@@ -137,6 +148,16 @@ Node* searchManga(Node** table, Node*** list, int retrieve) {
     return node;
 }
 
+
+/*
+ * Vladyslav Hrusha
+ * Searches a dictionary.
+ * 
+ * The dictionary given will be changed according to the
+ * search field
+ * 
+ * Partial search is implemented by using strstr()
+ */
 Node* searchDictionary(Node** dictionary, char* searchString, int num) {
     int size;
     size = optionToSize(num);
@@ -175,6 +196,10 @@ Node* searchDictionary(Node** dictionary, char* searchString, int num) {
     return head;
 }
 
+/*
+ * Vladyslav Hrusha
+ * Search by ID from a hash table
+ */
 Node* searchByID(Node** table, int id) {
     int key = divisionHash(id);
     Node* current = table[key];
@@ -188,6 +213,10 @@ Node* searchByID(Node** table, int id) {
     return current;
 }
 
+/*
+ * Heon Lee
+ * Search by ID range from a hash table
+ */
 Node* searchByIDRange(Node** table, int start, int end) {
     Node* head = NULL;
     for (int i = start; i < end + 1; i++) {
@@ -203,6 +232,10 @@ Node* searchByIDRange(Node** table, int start, int end) {
     return head;
 }
 
+/*
+ * Heon Lee
+ * Range search for the price field using a given price range
+ */
 Node* searchByPriceRange(Node** table, double start, double end) {
     Node* head = NULL;
     for (int i = 0; i < SIZE; i++) {
@@ -219,7 +252,8 @@ Node* searchByPriceRange(Node** table, double start, double end) {
 }
 
 /*
- * Nikita
+ * Nikita Kartavyi
+ * Search with two fields
  */
 Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
     int choice2, choice3;
@@ -231,6 +265,8 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
     validateOption(choice3, 0, 1);
     FLUSH;
     char* searchString2;
+    //Search Menu for second field. A user is not allowed
+    //to select the field which was selected as a first search field
     if (choice3 == 1) {
         printLine();
         if (choice != 2)
@@ -271,15 +307,17 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
 
 
     Node* result = NULL;
-    if (choice3 == 1) {
+    if (choice3 == 1) {//If a user wants to do a double search
         node = searchDictionary(list[choice - 2], searchString, choice - 2);
         result = searchDictionaryTwice(node, searchString,
                 searchString2, choice - 2, choice2 - 2);
-    } else {
+    } else {//If not
         node = searchDictionary(list[choice - 2],
                 searchString, choice - 2);
     }
 
+    
+    //Printing a result list
     if ((!choice3 && node != NULL) || (choice3 && result != NULL)) {
         TreeNode* tree = NULL;
         if (!choice3)
@@ -287,6 +325,7 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
         else
             insertList(result, &tree);
 
+        //Sorting Menu
         printLine();
         printf("SELECT HOW YOU WANT YOUR RESULTS TO BE DISPLAYED.\n");
         printf("1 - Unordered\n");
@@ -312,7 +351,7 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
         else if (a == 3)
             printInorderReverse(tree);
         freeTree(tree);
-    } else {
+    } else {//If the returned result list is NULL
         printLine();
         printf("SEARCH FAILED. BOOK NOT FOUND.\n");
         printLine();
@@ -322,12 +361,15 @@ Node* searchDouble(Node* node, Node*** list, char* searchString, int choice) {
 }
 
 /*
+ * Nikita Kartavyi
  * Double search
  * Takes the first result linked list as a parameter
  * I separated this part from searchDictionary which is single field search.
  * The two functions have different authors.
  * The functions might have duplicate parts.
  * 
+ * 
+ * Searches for the second search field from a result list
  */
 Node* searchDictionaryTwice(Node* firstResultList, char* searchString,
         char* searchString2, int num, int num2) {

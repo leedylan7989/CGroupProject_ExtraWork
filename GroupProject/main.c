@@ -19,6 +19,10 @@
 
 
 
+/*
+ * A main function
+ * 
+ */
 int main() {
     //Store node pointers instead of storing the whole nodes
     Node** table = (Node**) malloc(SIZE * sizeof (Node*));

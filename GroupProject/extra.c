@@ -1,5 +1,8 @@
 
 #include "extra.h"
+
+//All of the functions here are done by Heon Lee
+
 //Heon Lee
 //This function waits for user input
 //and allocates the input to Heap
@@ -26,6 +29,7 @@ char* getString() {
 
 
 /*
+ * Heon Lee
  * Parameter: c - a character to check
  * If a character is not 'y' or 'n', then the function
  * asks again until the user types 'y' or 'n'.
@@ -40,6 +44,10 @@ void checkYN(char c){
     }
 }
 
+/*
+ * Heon Lee
+ * This function changes a character to a dictionary index
+ */
 int characterToIndex(char c) {
     if ((c >= 65 && c <= 90) || (c >= 97 && c <= 112)) {
         //a - z A - Z
@@ -54,12 +62,20 @@ int characterToIndex(char c) {
     return 26;
 }
 
+/*
+ * This function changes a boolean value to a dictionary index
+ */
 int boolToIndex(bool c) {
     //false == 0, true == 1
     int i = c;
     return i;
 }
 
+
+/*
+ * A function to return a size according to the given choice
+ * num is an option that selects a dictionary
+ */
 int optionToSize(int num){
     if (num == 4) {
         return 2;
@@ -68,6 +84,10 @@ int optionToSize(int num){
     }
 }
 
+/*
+ * Builds a list. 
+ * If doubleSearch == 1, then build a list from a result list
+ */
 Node* buildList(Node* head, Node* node, int doubleSearch) {
     if (head == NULL) {
         return node;
@@ -87,6 +107,9 @@ Node* buildList(Node* head, Node* node, int doubleSearch) {
     return head;
 }
 
+/*
+ * Clears a result list
+ */
 void clearList(Node* head) {
     if (head != NULL) {
         clearList(head->nextList);
@@ -95,6 +118,9 @@ void clearList(Node* head) {
     
 }
 
+/*
+ * Switches a secondary list to a main result list
+ */
 void switchList(Node* head) {
     if (head != NULL) {
         switchList(head->nextSecondList);
@@ -104,6 +130,9 @@ void switchList(Node* head) {
     
 }
 
+/*
+ * Validates options
+ */
 int validateOption(int choice, int startRange, int endRange){
     while (choice < startRange || choice > endRange) {
         printLine();
@@ -118,6 +147,11 @@ int validateOption(int choice, int startRange, int endRange){
     return choice;
 }
 
+/*
+ * Validates options with an exception.
+ * This exception is a value that should not be selected but in
+ * the given range.
+ */
 int validateOptionWithException(int choice, int startRange, int endRange,
         int exception){
     while (choice < startRange || choice > endRange ||
@@ -134,6 +168,12 @@ int validateOptionWithException(int choice, int startRange, int endRange,
     return choice;
 }
 
+
+
+/*
+ * 
+ * Displays an option screen and takes a user input
+ */
 int optionScreen(int a) {
     int i;
     printLine();
@@ -153,6 +193,9 @@ int optionScreen(int a) {
 }
 
 
+/*
+ * Displays a main screen and takes a user input
+ */
 int mainScreen() {
     int a;
     printf("=============================================================\n");
